@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import LayoutHeader from "./header";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation/navigation.container";
 import { ReactChild } from "react";
 
 interface IProps {

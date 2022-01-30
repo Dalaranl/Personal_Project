@@ -1,21 +1,27 @@
 import * as S from "./BoardList.emotion";
 import { IPropsBoardList } from "./BoardList.types";
 import Pagination from "../../../../commons/libraries/pagination/Pagination";
+import BoardListCarouselUI from "./BoardListCarousel";
 
 export default function BoardListUI(props: IPropsBoardList) {
-  console.log(props.data?.fetchBoards);
   return (
     <S.Wrapper>
       <S.ListBody>
         <S.ListHeader></S.ListHeader>
-        <S.ListCarousel></S.ListCarousel>
+        <S.ListCarousel>
+          <BoardListCarouselUI onClickMoveDetail={props.onClickMoveDetail} />
+        </S.ListCarousel>
         <S.ListMain>
           <S.MainTitle>
             <span>자유게시판</span>
           </S.MainTitle>
           <S.MainList>
             {props.data?.fetchBoards.slice(0, -1).map((el: any) => (
-              <S.List key={el._id}>
+              <S.List
+                key={el._id}
+                id={el._id}
+                onClick={props.onClickMoveDetail}
+              >
                 <S.ListThumbNail>
                   <S.ThumbNail src="/img/nyangcat.jpeg" />
                 </S.ListThumbNail>

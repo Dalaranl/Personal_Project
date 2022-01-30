@@ -1,77 +1,5 @@
 import styled from "@emotion/styled";
 
-// Skeleton
-export const Wrapper = styled.div`
-  width: 100%;
-  min-width: 600px;
-  min-height: 94vh;
-
-  display: flex;
-`;
-export const ListBody = styled.div`
-  width: 86%;
-  min-width: 430px;
-  min-height: 94vh;
-  background-image: linear-gradient(
-    to bottom,
-    #a20568,
-    #77296c,
-    #4f3161,
-    #34304a,
-    #28292d
-  );
-`;
-export const ListAside = styled.div`
-  width: 14%;
-  min-width: 170px;
-  min-height: 94vh;
-  background-color: #33363d;
-`;
-
-// Header
-export const ListHeader = styled.div`
-  width: 100%;
-  height: 45vh;
-`;
-
-// Carousel
-export const ListCarousel = styled.div`
-  width: 100%;
-  height: 45vh;
-  /* padding: 20px; */
-`;
-
-// MainBody
-export const ListMain = styled.div`
-  width: 100%;
-  min-height: 45vh;
-`;
-
-export const MainTitle = styled.div`
-  width: 100%;
-  height: 5vh;
-
-  padding: 20px;
-
-  span {
-    font-size: 1.5em;
-
-    color: white;
-  }
-`;
-
-export const MainList = styled.div`
-  width: 100%;
-  min-height: 40vh;
-
-  padding: 0px 40px;
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-// List Componant
 export const List = styled.div`
   width: 29%;
   width: 383px;
@@ -164,10 +92,4 @@ export const Title = styled.div`
 
   font-size: 1.6rem;
   color: #ffffff;
-`;
-
-// 페이지네이션
-export const Pagination = styled.div`
-  width: 100%;
-  height: 20vh;
 `;

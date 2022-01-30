@@ -22,7 +22,7 @@ export default function BoardList() {
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
 
-  const onClickMoveDetail = (event: MouseEvent<HTMLButtonElement>) => {
+  const onClickMoveDetail = (event: MouseEvent<HTMLDivElement>) => {
     router.push(`/boards/${event.currentTarget.id}`);
   };
 

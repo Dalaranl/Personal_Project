@@ -20,11 +20,20 @@ export const Wrapper = styled.div`
   .MinMax {
     color: #88fe0a;
     margin-top: 50px;
+
+    border-radius: 50%;
+    :hover {
+      font-weight: 900;
+    }
   }
   #prev,
   #next {
     margin-top: 50px;
     color: #ffffff;
+
+    :hover {
+      font-weight: 900;
+    }
   }
 `;
 export const pageNum = styled.div`
