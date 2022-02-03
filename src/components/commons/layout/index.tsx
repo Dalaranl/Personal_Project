@@ -6,18 +6,23 @@ import { ReactChild } from "react";
 interface IProps {
   children: ReactChild;
 }
+const Wrapper = styled.div`
+  min-width: 850px;
+  width: 100vw;
+  height: 100vh;
+`;
 
 const LayoutBodyWrapper = styled.div`
   width: 100vw;
-  min-height: 94vh;
+  height: 94vh;
+
   display: flex;
 `;
 const LayoutBodyDetail = styled.div`
-  width: 84vw;
-  min-height: 94vh;
-`;
-const Wrapper = styled.div`
-  min-width: 850px;
+  width: 85vw;
+  height: 94vh;
+
+  overflow-x: hidden;
 `;
 
 export default function Layout(props: IProps) {

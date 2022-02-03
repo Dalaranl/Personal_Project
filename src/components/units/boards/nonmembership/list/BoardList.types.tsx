@@ -7,5 +7,4 @@ export interface IPropsBoardList {
   dataBoardsCount?: Pick<IQuery, "fetchBoardsCount">;
   onClickMoveDetail: (e: MouseEvent<HTMLDivElement>) => void;
   onClickMoveToNew: () => void;
-  onLoadMore: () => void;
 }

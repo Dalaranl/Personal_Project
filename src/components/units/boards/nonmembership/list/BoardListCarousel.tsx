@@ -29,6 +29,7 @@ export const FETCH_BOARD = gql`
 
 export default function BoardListCarouselUI(props: IProps) {
   const { data } = useQuery(FETCH_BOARDS_OFTHEBEST);
+  console.log(data?.fetchBoardsOfTheBest);
 
   const { data: best1 } = useQuery(FETCH_BOARD, {
     variables: { boardId: data?.fetchBoardsOfTheBest[0]._id },
@@ -42,10 +43,9 @@ export default function BoardListCarouselUI(props: IProps) {
   const { data: best4 } = useQuery(FETCH_BOARD, {
     variables: { boardId: data?.fetchBoardsOfTheBest[3]._id },
   });
-  console.log(best1, best2, best3, best4);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -60,7 +60,7 @@ export default function BoardListCarouselUI(props: IProps) {
         <div>
           <S.List id={best1?.fetchBoard?._id} onClick={props.onClickMoveDetail}>
             <S.ListThumbNail>
-              <S.ThumbNail src="/img/nyangcat.jpeg" />
+              <S.ThumbNail src="/img/DefaultProfile.png" />
             </S.ListThumbNail>
             <S.ListUserInfo>
               <S.ListLikeCount>
@@ -89,7 +89,7 @@ export default function BoardListCarouselUI(props: IProps) {
         <div>
           <S.List id={best2?.fetchBoard?._id} onClick={props.onClickMoveDetail}>
             <S.ListThumbNail>
-              <S.ThumbNail src="/img/nyangcat.jpeg" />
+              <S.ThumbNail src="/img/DefaultProfile.png" />
             </S.ListThumbNail>
             <S.ListUserInfo>
               <S.ListLikeCount>
@@ -118,7 +118,7 @@ export default function BoardListCarouselUI(props: IProps) {
         <div>
           <S.List id={best3?.fetchBoard?._id} onClick={props.onClickMoveDetail}>
             <S.ListThumbNail>
-              <S.ThumbNail src="/img/nyangcat.jpeg" />
+              <S.ThumbNail src="/img/DefaultProfile.png" />
             </S.ListThumbNail>
             <S.ListUserInfo>
               <S.ListLikeCount>
@@ -147,7 +147,7 @@ export default function BoardListCarouselUI(props: IProps) {
         <div>
           <S.List id={best4?.fetchBoard?._id} onClick={props.onClickMoveDetail}>
             <S.ListThumbNail>
-              <S.ThumbNail src="/img/nyangcat.jpeg" />
+              <S.ThumbNail src="/img/DefaultProfile.png" />
             </S.ListThumbNail>
             <S.ListUserInfo>
               <S.ListLikeCount>

@@ -2,15 +2,24 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 15vw;
-  min-width: 230.4px;
-  min-height: 94vh;
-
-  padding: 10px;
+  height: 94vh;
 
   position: sticky;
   top: 0px;
+  z-index: 3;
+
+  padding: 10px;
 
   background-color: #1f2024;
+
+  .navWrapper {
+    width: 100%;
+    height: 6%;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
 `;
 export const HomeIcon = styled.svg`
   width: 20%;
@@ -24,7 +33,7 @@ export const HomeIcon = styled.svg`
 `;
 export const HomeButton = styled.div`
   width: 100%;
-  height: 3%;
+  height: 100%;
 
   border-radius: 5px;
   margin-top: 5px;
@@ -34,7 +43,7 @@ export const HomeButton = styled.div`
   justify-content: start;
   align-items: center;
 
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: rgba(170, 170, 170);
 
   :hover {
@@ -57,7 +66,7 @@ export const MypageIcon = styled.svg`
 `;
 export const MyPageButton = styled.div`
   width: 100%;
-  height: 3%;
+  height: 100%;
 
   border-radius: 5px;
   margin-top: 5px;
@@ -87,7 +96,7 @@ export const FreeBoardIcon = styled.svg`
 `;
 export const FreeBoardButton = styled.div`
   width: 100%;
-  height: 3%;
+  height: 100%;
 
   border-radius: 5px;
   margin-top: 5px;
@@ -117,7 +126,7 @@ export const MarketIcon = styled.svg`
 `;
 export const MarketButton = styled.div`
   width: 100%;
-  height: 3%;
+  height: 100%;
 
   border-radius: 5px;
   margin-top: 5px;

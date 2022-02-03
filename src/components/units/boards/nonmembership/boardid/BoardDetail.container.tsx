@@ -1,32 +1,22 @@
-import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import {
-  IQuery,
-  IQueryFetchBoardArgs,
-} from "../../../../../commons/types/generated/types";
+import { MouseEvent, useState } from "react";
 import BoardDetailUi from "./BoardDetail.presenter";
-import { FETCH_BOARD } from "./BoardDetail.queries";
 
 export default function BoardDetail() {
   const router = useRouter();
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: { boardId: String(router.query.boardid) },
-    }
+  const [pushBoardDetail, setPushBoardDetail] = useState(
+    String(router.query.boardid)
   );
-  const [isYoutube, setIsYoutube] = useState(false);
-
-  const onClickOpen = () => {
-    setIsYoutube(true);
+  console.log(pushBoardDetail);
+  const RouterPushDetail = (e: MouseEvent<HTMLDivElement>) => {
+    setPushBoardDetail((prev) => e.currentTarget.id);
+    history.pushState("", null, e.currentTarget.id);
   };
 
   return (
     <BoardDetailUi
-      data={data}
-      onClickOpen={onClickOpen}
-      isYoutube={isYoutube}
+      pushBoardDetail={pushBoardDetail}
+      RouterPushDetail={RouterPushDetail}
     />
   );
 }

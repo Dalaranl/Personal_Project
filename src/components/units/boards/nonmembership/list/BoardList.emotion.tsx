@@ -12,33 +12,93 @@ export const ListBody = styled.div`
   width: 86%;
   min-width: 430px;
   min-height: 94vh;
-  background-image: linear-gradient(
-    to bottom,
-    #a20568,
-    #77296c,
-    #4f3161,
-    #34304a,
-    #28292d
-  );
+
+  background-image: linear-gradient(to bottom, #a20568, #34304a, #28292d);
 `;
 export const ListAside = styled.div`
   width: 14%;
   min-width: 170px;
   min-height: 94vh;
   background-color: #33363d;
+
+  z-index: 1;
 `;
 
 // Header
 export const ListHeader = styled.div`
-  width: 100%;
+  width: 96.8%;
   height: 45vh;
-`;
 
+  display: flex;
+
+  padding: 20px;
+  margin: 0px 20px 0px 20px;
+  border-bottom: 1px solid rgb(255, 255, 255);
+`;
+export const ListTheme = styled.div`
+  width: 40%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+export const ListInfo = styled.div`
+  width: 60%;
+  height: 100%;
+`;
+export const ListName = styled.div`
+  width: 100%;
+  height: 50%;
+
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+
+  padding: 20px;
+
+  font-size: 5.5rem;
+  text-shadow: 10px 10px 0 #2e2a34;
+  color: #ffffff;
+`;
+export const ListBest = styled.div`
+  width: 100%;
+  height: 50%;
+
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+
+  padding: 20px;
+
+  span {
+    font-size: 3rem;
+    text-shadow: 6px 6px 0 #2e2a34;
+    color: #ffffff;
+  }
+
+  button {
+    width: 15%;
+    height: 30%;
+
+    border: none;
+    margin: 0px 30px 13px 0px;
+    font-size: 1.6rem;
+
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: rgba(100, 100, 100);
+
+    :hover {
+      background-color: rgba(150, 150, 150, 0.8);
+    }
+  }
+`;
 // Carousel
 export const ListCarousel = styled.div`
   width: 100%;
   height: 45vh;
-  /* padding: 20px; */
 `;
 
 // MainBody
@@ -51,12 +111,13 @@ export const MainTitle = styled.div`
   width: 100%;
   height: 5vh;
 
-  padding: 20px;
+  padding: 40px;
 
   span {
-    font-size: 1.5em;
+    font-size: 2em;
 
     color: white;
+    text-shadow: 6px 6px 0 #2e2a34;
   }
 `;
 

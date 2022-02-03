@@ -7,13 +7,24 @@ export default function BoardListUI(props: IPropsBoardList) {
   return (
     <S.Wrapper>
       <S.ListBody>
-        <S.ListHeader></S.ListHeader>
+        <S.ListHeader>
+          <S.ListTheme>
+            <img src="/img/listTheme.jpeg" />
+          </S.ListTheme>
+          <S.ListInfo>
+            <S.ListName>자유게시판</S.ListName>
+            <S.ListBest>
+              <button onClick={props.onClickMoveToNew}>글쓰기</button>
+              <span>best 4!!</span>
+            </S.ListBest>
+          </S.ListInfo>
+        </S.ListHeader>
         <S.ListCarousel>
           <BoardListCarouselUI onClickMoveDetail={props.onClickMoveDetail} />
         </S.ListCarousel>
         <S.ListMain>
           <S.MainTitle>
-            <span>자유게시판</span>
+            <span>목록</span>
           </S.MainTitle>
           <S.MainList>
             {props.data?.fetchBoards.slice(0, -1).map((el: any) => (
@@ -23,7 +34,7 @@ export default function BoardListUI(props: IPropsBoardList) {
                 onClick={props.onClickMoveDetail}
               >
                 <S.ListThumbNail>
-                  <S.ThumbNail src="/img/nyangcat.jpeg" />
+                  <S.ThumbNail src="/img/DefaultProfile.png" />
                 </S.ListThumbNail>
                 <S.ListUserInfo>
                   <S.ListLikeCount>

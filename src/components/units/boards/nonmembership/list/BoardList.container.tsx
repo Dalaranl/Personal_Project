@@ -11,7 +11,7 @@ import {
 
 export default function BoardList() {
   const router = useRouter();
-  const { data, refetch, fetchMore } = useQuery<
+  const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS, {
@@ -30,24 +30,6 @@ export default function BoardList() {
     router.push("/boards/new");
   };
 
-  const onLoadMore = () => {
-    if (!data) return;
-    fetchMore({
-      variables: { page: Math.ceil(data.fetchBoards.length / 10) + 1 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchBoards)
-          return {
-            fetchBoards: [...prev.fetchBoards],
-          };
-        else {
-          return {
-            fetchBoards: [...prev.fetchBoards, ...fetchMoreResult?.fetchBoards],
-          };
-        }
-      },
-    });
-  };
-
   return (
     <BoardListUI
       data={data}
@@ -55,7 +37,6 @@ export default function BoardList() {
       dataBoardsCount={dataBoardsCount}
       onClickMoveDetail={onClickMoveDetail}
       onClickMoveToNew={onClickMoveToNew}
-      onLoadMore={onLoadMore}
     />
   );
 }
