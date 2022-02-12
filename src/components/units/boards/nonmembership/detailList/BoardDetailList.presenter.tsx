@@ -1,10 +1,13 @@
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../../commons/types/generated/types";
 import * as S from "./BoardDetailList.emotion";
+import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
   data: Pick<IQuery, "fetchBoards">;
+  keyword: string;
   RouterPushDetail: (e: MouseEvent<HTMLDivElement>) => void;
+  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function BoardDetailListUI(props: IProps) {
@@ -12,7 +15,13 @@ export default function BoardDetailListUI(props: IProps) {
     <S.Wrapper>
       <S.Header>
         <S.HeaderTitle>목록</S.HeaderTitle>
-        <S.Search></S.Search>
+        <S.Search>
+          <input
+            type="text"
+            onChange={props.onChangeSearch}
+            placeholder="Search"
+          />
+        </S.Search>
       </S.Header>
       {props.data?.fetchBoards?.map((el, index) => (
         <S.CommentsWrapper
@@ -44,7 +53,20 @@ export default function BoardDetailListUI(props: IProps) {
                 </S.Like>
               </S.Top>
               <S.Bottom>
-                <div className="text">{el.title}</div>
+                <S.Title>
+                  {el.title
+                    .replaceAll(props.keyword, `zhqlem${props.keyword}zhqlem`)
+                    .split("zhqlem")
+                    .map((el) => (
+                      <S.TitleSpan
+                        id="title"
+                        key={uuidv4()}
+                        isMatched={el === props.keyword || false}
+                      >
+                        {el}
+                      </S.TitleSpan>
+                    ))}
+                </S.Title>
               </S.Bottom>
             </S.ContentsInfo>
           </S.Comments>

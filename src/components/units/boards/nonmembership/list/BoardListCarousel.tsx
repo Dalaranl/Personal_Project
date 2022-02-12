@@ -32,17 +32,18 @@ export default function BoardListCarouselUI(props: IProps) {
   console.log(data?.fetchBoardsOfTheBest);
 
   const { data: best1 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[0]._id },
+    variables: { boardId: data?.fetchBoardsOfTheBest[0]?._id },
   });
   const { data: best2 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[1]._id },
+    variables: { boardId: data?.fetchBoardsOfTheBest[1]?._id },
   });
   const { data: best3 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[2]._id },
+    variables: { boardId: data?.fetchBoardsOfTheBest[2]?._id },
   });
   const { data: best4 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[3]._id },
+    variables: { boardId: data?.fetchBoardsOfTheBest[3]?._id },
   });
+  console.log("분활 아이디" + best1, best2, best3, best4);
 
   const settings = {
     dots: false,

@@ -1,27 +1,23 @@
-import { useQuery } from "@apollo/client";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 // import { useRouter } from "next/router";
-import {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../../../commons/types/generated/types";
-import { FETCH_BOARDS } from "../list/BoardList.queries";
+import { IQuery } from "../../../../../commons/types/generated/types";
+
 import BoardDetailListUI from "./BoardDetailList.presenter";
 
 interface IProps {
   RouterPushDetail: (e: MouseEvent<HTMLDivElement>) => void;
+  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  data: Pick<IQuery, "fetchBoards">;
+  keyword: string;
 }
 
 export default function BoardDetailList(props: IProps) {
-  //   const router = useRouter();
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS,
-    {
-      variables: { page: 1 },
-    }
-  );
-
   return (
-    <BoardDetailListUI data={data} RouterPushDetail={props.RouterPushDetail} />
+    <BoardDetailListUI
+      keyword={props.keyword}
+      data={props.data}
+      onChangeSearch={props.onChangeSearch}
+      RouterPushDetail={props.RouterPushDetail}
+    />
   );
 }

@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 
+interface IProps {
+  isMatched: boolean;
+}
+
 export const Wrapper = styled.div`
   width: 100%;
+
   padding: 10px;
 
   #footer {
@@ -23,22 +28,52 @@ export const CommentsWrapper = styled.div`
 `;
 export const Header = styled.div`
   width: 100%;
-  min-height: 12vh;
+  height: 15vh;
+
+  padding: 10px;
 
   margin-bottom: 20px;
+  border-bottom: 1px solid rgb(150, 150, 150);
 `;
 export const HeaderTitle = styled.div`
   width: 100%;
-  height: 30%;
+  height: 35%;
 
   font-size: 2rem;
   color: rgb(245, 245, 245);
 `;
 export const Search = styled.div`
   width: 100%;
-  height: 70%;
+  height: 65%;
 
-  border-bottom: 1px solid rgb(150, 150, 150);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  input {
+    width: 100%;
+    height: 60%;
+
+    padding: 20px;
+
+    border-radius: 10px;
+    border: none;
+
+    font-size: 1.3rem;
+
+    color: rgb(200, 200, 200);
+    background-color: rgba(150, 150, 150, 0.4);
+
+    :hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    :focus {
+      outline: none;
+    }
+    ::placeholder {
+      color: rgb(200, 200, 200);
+    }
+  }
 `;
 export const Comments = styled.div`
   width: 100%;
@@ -106,13 +141,24 @@ export const Like = styled.div`
 export const Bottom = styled.div`
   width: 100%;
   height: 50%;
+`;
 
-  div {
-    color: rgb(245, 245, 245);
-    margin: 5px 0px 0px 20px;
-    font-size: 1.7rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+export const Title = styled.div`
+  width: 90%;
+  height: 100%;
+
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  margin: 5px 0px 0px 20px;
+
+  font-size: 1.7rem;
+  color: rgb(245, 245, 245);
+`;
+export const TitleSpan = styled.span`
+  color: ${(props: IProps) =>
+    props.isMatched ? "#fe1881" : "rgb(245, 245, 245)"};
+  font-size: 1.7rem;
 `;

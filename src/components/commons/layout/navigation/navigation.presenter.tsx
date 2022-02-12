@@ -1,15 +1,17 @@
-import { MouseEvent } from "react";
 import * as S from "./navigation.emotion";
 
 interface IProps {
-  onClickToMove: (e: MouseEvent<HTMLDivElement>) => void;
+  onClickMoveToFreeboard: () => void;
+  onClickMoveToHome: () => void;
+  onClickMoveToGiphy: () => void;
+  onClickMoveToGiphyHistory: () => void;
 }
 
 export default function LayoutNavigationUI(props: IProps) {
   return (
     <S.Wrapper>
       <div className="navWrapper">
-        <S.HomeButton className="home" onClick={props.onClickToMove}>
+        <S.HomeButton className="home" onClick={props.onClickMoveToHome}>
           <S.HomeIcon
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -24,7 +26,10 @@ export default function LayoutNavigationUI(props: IProps) {
         </S.HomeButton>
       </div>
       <div className="navWrapper">
-        <S.MyPageButton className="myPage" onClick={props.onClickToMove}>
+        <S.MyPageButton
+          className="myPage"
+          onClick={props.onClickMoveToFreeboard}
+        >
           <S.MypageIcon
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -45,7 +50,7 @@ export default function LayoutNavigationUI(props: IProps) {
       <div className="navWrapper">
         <S.FreeBoardButton
           className="myFreeBoard"
-          onClick={props.onClickToMove}
+          onClick={props.onClickMoveToFreeboard}
         >
           <S.FreeBoardIcon
             xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +67,10 @@ export default function LayoutNavigationUI(props: IProps) {
         </S.FreeBoardButton>
       </div>
       <div className="navWrapper">
-        <S.MarketButton className="myMarket" onClick={props.onClickToMove}>
+        <S.MarketButton
+          className="myMarket"
+          onClick={props.onClickMoveToFreeboard}
+        >
           <S.MarketIcon
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -75,6 +83,37 @@ export default function LayoutNavigationUI(props: IProps) {
           </S.MarketIcon>
           <span>중고마켓</span>
         </S.MarketButton>
+      </div>
+      <div className="navWrapper">
+        <S.GiphyButton className="myMarket" onClick={props.onClickMoveToGiphy}>
+          <S.GiphyIcon
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
+          </S.GiphyIcon>
+          <span>GIPHY</span>
+        </S.GiphyButton>
+      </div>
+      <div className="navWrapper">
+        <S.GiphyHistoryButton
+          className="myMarket"
+          onClick={props.onClickMoveToGiphyHistory}
+        >
+          <S.GiphyHistoryIcon
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
+          </S.GiphyHistoryIcon>
+          <span>GIPHY-History</span>
+        </S.GiphyHistoryButton>
       </div>
       <S.DivideLine />
     </S.Wrapper>

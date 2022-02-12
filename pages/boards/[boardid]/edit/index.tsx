@@ -9,13 +9,15 @@ import NewPage from "../../new";
 
 export default function EditPage() {
   const router = useRouter();
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: { boardId: String(router.query.boardid) },
-    }
-  );
-  console.log(data);
+  const { loading, data } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: { boardId: String(router.query.boardid) },
+  });
+  if (loading) {
+    return "Loading...";
+  }
 
   return <NewPage isEdit={true} data={data} />;
 }

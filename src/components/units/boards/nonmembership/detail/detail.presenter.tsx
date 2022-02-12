@@ -4,22 +4,37 @@ import CommentList from "../../comments/list/CommentList.container";
 import ReactPlayer from "react-player";
 import { getMyDate } from "../../../../../commons/libraries/getData";
 import { IQuery } from "../../../../../commons/types/generated/types";
+import DeleteModal from "../../../../commons/libraries/modal/deleteModal";
 
 interface IPropsDetailUI {
   data?: Pick<IQuery, "fetchBoard">;
   isYoutube: boolean;
   pushBoardDetail: string;
   datas: Pick<IQuery, "fetchBoardComments">;
+  imgUrl: string;
+  number: number;
+  modal: boolean;
+  modalMessage: string;
+  modalClose: () => void;
   onClickLike: () => void;
   onClickDisLike: () => void;
   onClickOpen: () => void;
   onClickEdit: () => void;
   onClickNew: () => void;
+  onClickPrev: () => void;
+  onClickNext: () => void;
+  onClickDelete: () => void;
 }
 
 export default function DetailUI(props: IPropsDetailUI) {
   return (
     <S.Wrapper>
+      <DeleteModal
+        modal={props.modal}
+        modalMessage={props.modalMessage}
+        modalClose={props.modalClose}
+      />
+
       <S.DetailHeader>
         <S.Writer>
           <S.WriterProfile>
@@ -35,6 +50,7 @@ export default function DetailUI(props: IPropsDetailUI) {
           </S.WriterInfo>
         </S.Writer>
         <S.ContentsInfo>
+          <S.HeaderBTN onClick={props.onClickDelete}>삭제하기</S.HeaderBTN>
           <S.HeaderBTN onClick={props.onClickNew}>글쓰기</S.HeaderBTN>
           <S.HeaderBTN onClick={props.onClickEdit}>수정하기</S.HeaderBTN>
           <S.ContentsLike>
@@ -49,7 +65,29 @@ export default function DetailUI(props: IPropsDetailUI) {
       </S.DetailHeader>
       <S.MainContents>
         <S.ContentsImage>
-          <img src="/img/MushDashillustrations1080p.png" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            onClick={props.onClickPrev}
+          >
+            <path d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z" />
+          </svg>
+
+          <img
+            src={props.imgUrl}
+            onError={(e) => {
+              e.currentTarget.src = "/img/Illustrations.png";
+            }}
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            onClick={props.onClickNext}
+          >
+            <path d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
+          </svg>
         </S.ContentsImage>
         <S.ContentsTitle>
           <S.ContentsTitleTop />

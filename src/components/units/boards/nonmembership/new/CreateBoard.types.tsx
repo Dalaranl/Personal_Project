@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../../commons/types/generated/types";
 
 export interface IPropsCreateBoard {
@@ -19,12 +19,15 @@ export interface IPropsCreateBoardUI {
   onChangeDetailAddress: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickReset: () => void;
   onClickUpdateBoard: () => void;
+  onClickImg: () => void;
+  onChangeUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickEditImg: (e: MouseEvent<HTMLImageElement>) => void;
+
   userInfo: {
     writer: string;
     password: string;
     title: string;
     youtubeUrl: string;
-    images: string[];
   };
   adDress: {
     zipcode: string;
@@ -37,4 +40,8 @@ export interface IPropsCreateBoardUI {
   modalMessage: string;
   isEdit: boolean;
   data: Pick<IQuery, "fetchBoard">;
+  fileRef: any;
+  imgUrl: string;
+  images: string[];
+  editImages: string[];
 }

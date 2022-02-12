@@ -25,11 +25,6 @@ export const HomeIcon = styled.svg`
   width: 20%;
   height: 50%;
   color: rgba(170, 170, 170);
-
-  :hover {
-    background-color: rgba(150, 150, 150, 0.3);
-    color: #ffffff;
-  }
 `;
 export const HomeButton = styled.div`
   width: 100%;
@@ -58,11 +53,6 @@ export const MypageIcon = styled.svg`
   width: 20%;
   height: 50%;
   color: rgba(170, 170, 170);
-
-  :hover {
-    background-color: rgba(150, 150, 150, 0.3);
-    color: #ffffff;
-  }
 `;
 export const MyPageButton = styled.div`
   width: 100%;
@@ -88,11 +78,6 @@ export const FreeBoardIcon = styled.svg`
   width: 20%;
   height: 50%;
   color: rgba(170, 170, 170);
-
-  :hover {
-    background-color: rgba(150, 150, 150, 0.3);
-    color: #ffffff;
-  }
 `;
 export const FreeBoardButton = styled.div`
   width: 100%;
@@ -115,16 +100,64 @@ export const FreeBoardButton = styled.div`
   }
 `;
 export const MarketIcon = styled.svg`
-  width: 20%;
+  width: 19%;
   height: 50%;
   color: rgba(170, 170, 170);
+`;
+export const MarketButton = styled.div`
+  width: 100%;
+  height: 100%;
+
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-right: 10px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  color: rgba(170, 170, 170);
+  font-size: 1.1rem;
 
   :hover {
     background-color: rgba(150, 150, 150, 0.3);
     color: #ffffff;
   }
 `;
-export const MarketButton = styled.div`
+
+export const GiphyIcon = styled.svg`
+  width: 20%;
+  height: 50%;
+  color: rgba(170, 170, 170);
+`;
+export const GiphyButton = styled.div`
+  width: 100%;
+  height: 100%;
+
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-right: 10px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  color: rgba(170, 170, 170);
+  font-size: 1.1rem;
+
+  :hover {
+    background-color: rgba(150, 150, 150, 0.3);
+    color: #ffffff;
+  }
+`;
+export const GiphyHistoryIcon = styled.svg`
+  width: 20%;
+  height: 50%;
+  color: rgba(170, 170, 170);
+
+  margin-left: 1vw;
+`;
+export const GiphyHistoryButton = styled.div`
   width: 100%;
   height: 100%;
 

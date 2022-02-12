@@ -16,6 +16,7 @@ export const FETCH_BOARD = gql`
         address
         addressDetail
       }
+      images
     }
   }
 `;
@@ -29,5 +30,11 @@ export const LIKE_BOARD = gql`
 export const DISLIKE_BOARD = gql`
   mutation dislikeBoard($boardId: ID!) {
     dislikeBoard(boardId: $boardId)
+  }
+`;
+
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `;

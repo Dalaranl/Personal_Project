@@ -1,14 +1,18 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { checkFileValidation } from "../../../../../commons/libraries/checkFileValidation";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
 } from "../../../../../commons/types/generated/types";
 import CreateBoardUI from "./CreateBoard.presenter";
-import { CREAT_BOARD, UPDATE_BOARD } from "./CreateBoard.queries";
+import { CREAT_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./CreateBoard.queries";
 import { IPropsCreateBoard } from "./CreateBoard.types";
+
+const STORAGE = "https://storage.googleapis.com/";
 
 export default function CreateBoard(props: IPropsCreateBoard) {
   const router = useRouter();
@@ -20,13 +24,24 @@ export default function CreateBoard(props: IPropsCreateBoard) {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
   const [userInfo, setUserInfo] = useState({
     writer: "",
     password: "",
     title: "",
     youtubeUrl: "",
-    images: [],
   });
+  const [images, setImages] = useState<string[]>([]);
+  const [editImages, setEditImages] = useState<string[]>([]);
+  useEffect(() => {
+    if (props.data) {
+      setEditImages([...editImages, ...props.data?.fetchBoard.images]);
+    }
+  }, []);
+
   const [contents, setContents] = useState("");
   const { writer, password, title, youtubeUrl } = userInfo;
   const [modal, setModal] = useState(false);
@@ -36,6 +51,8 @@ export default function CreateBoard(props: IPropsCreateBoard) {
     addressDetail: "",
   });
   const { zipcode, address, addressDetail } = adDress;
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [imgUrl, setImgUrl] = useState("");
 
   // Modal
   const [modalMessage, setModalMessage] = useState("");
@@ -49,6 +66,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   const [isNext, setIsNext] = useState(false);
   const [isPrev, setIsPrev] = useState(false);
   const [isReset, setIsReset] = useState(false);
+
   useEffect(() => {
     document.getElementById("movePage").style.left = `${wrapperSize}vw`;
   }, [isNext]);
@@ -60,21 +78,11 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   }, [isReset]);
 
   const onClickNextPage = () => {
-    props.isEdit &&
-      setUserInfo({
-        ...userInfo,
-        writer: props.data?.fetchBoard.writer,
-        title: props.data?.fetchBoard.title,
-        youtubeUrl: props.data?.fetchBoard.youtubeUrl,
-      });
-    props.isEdit &&
-      setAddress({
-        ...adDress,
-        zipcode: props.data?.fetchBoard.boardAddress.zipcode,
-        address: props.data?.fetchBoard.boardAddress.address,
-        addressDetail: props.data?.fetchBoard.boardAddress.addressDetail,
-      });
-    props.isEdit && setContents((prev) => props.data?.fetchBoard.contents);
+    if (props.isEdit) {
+      setWrapperSize((prev) => prev - 100);
+      setIsNext((prev) => !prev);
+      return;
+    }
 
     if (writer && password && wrapperSize === 15) {
       setWrapperSize((prev) => prev - 100);
@@ -113,8 +121,8 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       password: "",
       title: "",
       youtubeUrl: "",
-      images: [],
     });
+    setImages((prev) => []);
     setAddress({
       ...adDress,
       zipcode: "",
@@ -154,6 +162,38 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       [name]: value,
     });
   };
+  const onClickImg = () => {
+    fileRef.current?.click();
+  };
+
+  const onClickEditImg = (e: MouseEvent<HTMLImageElement>) => {
+    setEditImages(editImages.filter((el) => el !== e.currentTarget.id));
+    fileRef.current?.click();
+  };
+
+  const onChangeUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    const isValid = checkFileValidation(images, file);
+
+    if (!isValid) return;
+
+    try {
+      const result = await uploadFile({ variables: { file } });
+      console.log(result.data?.uploadFile.url);
+
+      if (props.isEdit) {
+        setEditImages((prev) => [...prev, result.data?.uploadFile.url]);
+        return;
+      }
+
+      setImgUrl(STORAGE + result.data?.uploadFile.url);
+      setImages((prev) => [...prev, String(result.data?.uploadFile.url)]);
+    } catch (error: any) {
+      setModalMessage((prev) => "사진 등록에 실패하였습니다.");
+      handleOpen();
+    }
+  };
 
   // query
   const onClickCreateBoard = async () => {
@@ -166,6 +206,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
             title,
             contents,
             youtubeUrl,
+            images,
             boardAddress: {
               zipcode,
               address,
@@ -181,21 +222,25 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   };
 
   const onClickUpdateBoard = async () => {
+    const updateBoardInput: any = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+    if (editImages) updateBoardInput.images = editImages;
+
     try {
       await updateBoard({
         variables: {
           boardId: String(router.query.boardid),
           password,
-          updateBoardInput: {
-            title,
-            contents,
-            youtubeUrl,
-            boardAddress: {
-              zipcode,
-              address,
-              addressDetail,
-            },
-          },
+          updateBoardInput,
         },
       });
       router.push(`/boards/${router.query.boardid}`);
@@ -203,8 +248,10 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       console.log(error.message);
     }
   };
+
   return (
     <CreateBoardUI
+      onClickEditImg={onClickEditImg}
       onClickNextPage={onClickNextPage}
       onClickPrevPage={onClickPrevPage}
       onChangeUserInfo={onChangeUserInfo}
@@ -217,6 +264,8 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       onChangeDetailAddress={onChangeDetailAddress}
       onClickReset={onClickReset}
       onClickUpdateBoard={onClickUpdateBoard}
+      onClickImg={onClickImg}
+      onChangeUpload={onChangeUpload}
       modal={modal}
       isDaumPost={isDaumPost}
       userInfo={userInfo}
@@ -225,6 +274,10 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       adDress={adDress}
       isEdit={props.isEdit}
       data={props.data}
+      fileRef={fileRef}
+      imgUrl={imgUrl}
+      images={images}
+      editImages={editImages}
     />
   );
 }

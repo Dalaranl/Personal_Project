@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import {
   IQuery,
@@ -7,18 +7,31 @@ import {
 } from "../../../../commons/types/generated/types";
 import BoardDetailList from "../../../units/boards/nonmembership/detailList/BoardDetailList.container";
 import { FETCH_BOARDS } from "../../../units/boards/nonmembership/list/BoardList.queries";
+import _ from "lodash";
 
 interface IProps {
   RouterPushDetail: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function DetailListScroll(props: IProps) {
-  const { data, fetchMore } = useQuery<
+  const { loading, data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS, {
     variables: { page: 1 },
   });
+  const [keyword, setKeyword] = useState<string>();
+
+  if (loading) return "Loading...";
+
+  const getDebounce = _.debounce((el) => {
+    refetch({ search: el, page: 1 });
+    setKeyword(el);
+  }, 500);
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(e.target.value);
+  };
 
   const onLoadMore = () => {
     if (!data) return;
@@ -57,7 +70,12 @@ export default function DetailListScroll(props: IProps) {
         // }
         useWindow={false}
       >
-        <BoardDetailList RouterPushDetail={props.RouterPushDetail} />
+        <BoardDetailList
+          RouterPushDetail={props.RouterPushDetail}
+          onChangeSearch={onChangeSearch}
+          data={data}
+          keyword={keyword}
+        />
       </InfiniteScroll>
     </div>
   );

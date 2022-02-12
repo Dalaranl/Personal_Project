@@ -5,6 +5,7 @@ import * as S from "./pagination.emotion";
 interface IProps {
   dataBoardsCount?: Pick<IQuery, "fetchBoardsCount"> | undefined;
   refetch: any;
+  keyword: string;
 }
 
 export default function Pagination(props: IProps) {
@@ -20,7 +21,10 @@ export default function Pagination(props: IProps) {
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     setPageId(Number(event.currentTarget.id));
-    props.refetch({ page: Number(event.currentTarget.id) });
+    props.refetch({
+      search: props.keyword,
+      page: Number(event.currentTarget.id),
+    });
   };
 
   console.log(`start: ${startPage}, Id: ${pageId}`);
@@ -34,7 +38,7 @@ export default function Pagination(props: IProps) {
     }
     setStartPage((prev) => prev - 10);
     setPageId((prev) => startPage - 10);
-    props.refetch({ page: startPage - 10 });
+    props.refetch({ search: props.keyword, page: startPage - 10 });
   };
 
   const onClickNextPage = () => {
@@ -47,7 +51,7 @@ export default function Pagination(props: IProps) {
     }
     setStartPage((prev) => prev + 10);
     setPageId((prev) => 10 + startPage);
-    props.refetch({ page: startPage + 10 });
+    props.refetch({ search: props.keyword, page: startPage + 10 });
   };
 
   const onClickGoMinPage = () => {
@@ -57,11 +61,11 @@ export default function Pagination(props: IProps) {
     setGoPrevPage((prve) => "");
     setStartPage((prev) => 1);
     setPageId((prev) => 1);
-    props.refetch({ page: 1 });
+    props.refetch({ search: props.keyword, page: 1 });
   };
 
   const onClickGoMaxPage = () => {
-    props.refetch({ page: lastPage });
+    props.refetch({ search: props.keyword, page: lastPage });
     setStartPage((prev) => lastPage);
     setGoMaxPage("");
     setGoMinPage("〈〈");

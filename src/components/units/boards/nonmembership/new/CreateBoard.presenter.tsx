@@ -5,6 +5,9 @@ import ReactPlayer from "react-player";
 import FooterSubmit from "./common/footerSubmit";
 import BasicModal from "../../../../commons/libraries/modal/basicModal";
 import DaumPostCode from "../../../../commons/libraries/modal/addressModal";
+import { Fragment } from "react";
+
+const STORAGE = "https://storage.googleapis.com/";
 
 export default function CreateBoardUI(props: IPropsCreateBoardUI) {
   const { youtubeUrl } = props.userInfo;
@@ -188,7 +191,8 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                     url={`${
                       youtubeUrl || props.data?.fetchBoard?.youtubeUrl || ""
                     }`}
-                    height={370.61}
+                    height={385}
+                    width={500}
                   />
                 </div>
               </div>
@@ -197,15 +201,49 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                   <span>Picture</span>
                 </div>
                 <div className="Url">
-                  <S.UrlInput placeholder="Picture Url" />
+                  <div className="Urlpic">
+                    <button onClick={props.onClickImg}>
+                      {props.isEdit ? "사진 수정하기" : "사진 등록하기"}
+                    </button>
+                  </div>
+                  <div className="Urlpic">
+                    <span>
+                      {props.isEdit
+                        ? `사진등록 갯수: ${props.editImages.length}`
+                        : `사진등록 갯수: ${props.images.length}`}
+                      개
+                    </span>
+                  </div>
+                  <div className="Urlpic">
+                    <input
+                      type="file"
+                      ref={props.fileRef}
+                      onChange={props.onChangeUpload}
+                    />
+                  </div>
                 </div>
                 <div className="UrlContents">
-                  <img
-                    onError={(e) => {
-                      e.currentTarget.src = "/img/Illustrations.png";
-                    }}
-                    src=""
-                  />
+                  {props.isEdit
+                    ? props.editImages.map((el) => (
+                        <Fragment key={el}>
+                          <img
+                            id={el}
+                            className="editUrl"
+                            src={STORAGE + el}
+                            onClick={props.onClickEditImg}
+                          />
+                        </Fragment>
+                      ))
+                    : props.images.map((el) => (
+                        <Fragment key={el}>
+                          <img
+                            id={el}
+                            className="editUrl"
+                            src={STORAGE + el}
+                            onClick={props.onClickEditImg}
+                          />
+                        </Fragment>
+                      ))}
                 </div>
               </div>
             </S.UrlBody>

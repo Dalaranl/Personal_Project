@@ -2,6 +2,7 @@ import * as S from "./BoardList.emotion";
 import { IPropsBoardList } from "./BoardList.types";
 import Pagination from "../../../../commons/libraries/pagination/Pagination";
 import BoardListCarouselUI from "./BoardListCarousel";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IPropsBoardList) {
   return (
@@ -24,7 +25,12 @@ export default function BoardListUI(props: IPropsBoardList) {
         </S.ListCarousel>
         <S.ListMain>
           <S.MainTitle>
-            <span>목록</span>
+            <span>목록</span>{" "}
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={props.onChangeSearch}
+            />
           </S.MainTitle>
           <S.MainList>
             {props.data?.fetchBoards.slice(0, -1).map((el: any) => (
@@ -55,7 +61,19 @@ export default function BoardListUI(props: IPropsBoardList) {
                 </S.ListUserInfo>
                 <S.ListTitle>
                   <div id="title">Title</div>
-                  <S.Title>{el.title}</S.Title>
+                  <S.Title>
+                    {el.title
+                      .replaceAll(props.keyword, `zhqlem${props.keyword}zhqlem`)
+                      .split("zhqlem")
+                      .map((el: string) => (
+                        <S.SearchTitle
+                          key={uuidv4()}
+                          isMatched={el === props.keyword || false}
+                        >
+                          {el}
+                        </S.SearchTitle>
+                      ))}
+                  </S.Title>
                 </S.ListTitle>
               </S.List>
             ))}
@@ -64,6 +82,7 @@ export default function BoardListUI(props: IPropsBoardList) {
         <S.Pagination>
           <Pagination
             refetch={props.refetch}
+            keyword={props.keyword}
             dataBoardsCount={props.dataBoardsCount}
           />
         </S.Pagination>

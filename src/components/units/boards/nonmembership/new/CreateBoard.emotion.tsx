@@ -376,6 +376,46 @@ export const UrlBody = styled.div`
   .Url {
     width: 100%;
     height: 15%;
+
+    display: flex;
+
+    .Urlpic {
+      width: 33%;
+      height: 80%;
+
+      display: flex;
+      align-items: flex-end;
+
+      input {
+        display: none;
+      }
+
+      button {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 20px;
+        border: none;
+
+        font-size: 1.5rem;
+        color: rgb(200, 200, 200);
+        background-color: rgba(150, 150, 150, 0.4);
+
+        :hover {
+          background-color: rgba(150, 150, 150, 0.8);
+        }
+        :active {
+          box-shadow: 3px 3px -3px black;
+        }
+      }
+
+      span {
+        color: rgb(200, 200, 200);
+        font-size: 2rem;
+
+        margin-left: 20px;
+      }
+    }
   }
   .UrlContents {
     width: 100%;
@@ -388,6 +428,10 @@ export const UrlBody = styled.div`
       height: 100%;
 
       border-radius: 15px;
+    }
+    .editUrl {
+      width: 33%;
+      height: 50%;
     }
   }
 `;

@@ -10,10 +10,20 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const MoveToTop = styled.div`
+  width: 5vh;
+  height: 5vh;
+
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  right: 0.5px;
+`;
+
 // 상단 설명
 export const DetailHeader = styled.div`
   width: 100%;
-  min-height: 8%;
+  min-height: 10vh;
 
   position: sticky;
   top: 0px;
@@ -129,16 +139,31 @@ export const MainContents = styled.div`
   margin-top: 20px;
 `;
 export const ContentsImage = styled.div`
-  width: 30%;
+  width: 50%;
   height: 100%;
 
   padding: 10px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   img {
-    width: 100%;
+    width: 80%;
     height: 100%;
 
     border-radius: 15px;
+  }
+
+  svg {
+    width: 15%;
+    height: 70%;
+
+    color: white;
+
+    :hover {
+      color: #88fe0a;
+    }
   }
 `;
 export const ContentsTitle = styled.div`

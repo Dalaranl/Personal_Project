@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+interface IProps {
+  isMatched: boolean;
+}
+
 // Skeleton
 export const Wrapper = styled.div`
   width: 100%;
@@ -116,8 +120,35 @@ export const MainTitle = styled.div`
   span {
     font-size: 2em;
 
+    margin-right: 20px;
     color: white;
     text-shadow: 6px 6px 0 #2e2a34;
+  }
+
+  input {
+    width: 26.5%;
+    min-width: 26.5%;
+    height: 60%;
+
+    padding: 20px;
+
+    border-radius: 10px;
+    border: none;
+
+    font-size: 1.3rem;
+
+    color: rgb(200, 200, 200);
+    background-color: rgba(150, 150, 150, 0.4);
+
+    :hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    :focus {
+      outline: none;
+    }
+    ::placeholder {
+      color: rgb(200, 200, 200);
+    }
   }
 `;
 
@@ -202,6 +233,7 @@ export const ListWriter = styled.div`
   width: 100%;
   height: 40%;
 
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -223,8 +255,11 @@ export const Title = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  font-size: 1.6rem;
   color: #ffffff;
+`;
+export const SearchTitle = styled.span`
+  color: ${(props: IProps) => (props.isMatched ? "#fe1881" : "#ffffff")};
+  font-size: 1.6rem;
 `;
 
 // 페이지네이션
