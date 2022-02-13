@@ -5,7 +5,7 @@ import * as S from "./pagination.emotion";
 interface IProps {
   dataBoardsCount?: Pick<IQuery, "fetchBoardsCount"> | undefined;
   refetch: any;
-  keyword: string;
+  keyword: string | undefined;
 }
 
 export default function Pagination(props: IProps) {

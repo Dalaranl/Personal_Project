@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
 import Dots from "./Dots";
-import FistPage from "../src/components/units/home/fist";
-import SecondPage from "../src/components/units/home/second";
-import ThirdPage from "../src/components/units/home/third";
-import FourthPage from "../src/components/units/home/fourth";
+import FistPage from "../src/components/units/homePage/fist";
+import SecondPage from "../src/components/units/homePage/second";
+import ThirdPage from "../src/components/units/homePage/third";
+import FourthPage from "../src/components/units/homePage/fourth";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 const DIVIDER_HEIGHT = 5;
 
 export default function App() {
-  const outerDivRef = useRef(null);
+  const outerDivRef = useRef<any>(null);
   const [scrollIndex, setScrollIndex] = useState(1);
 
   useEffect(() => {

@@ -21,7 +21,10 @@ export default function BoardListUI(props: IPropsBoardList) {
           </S.ListInfo>
         </S.ListHeader>
         <S.ListCarousel>
-          <BoardListCarouselUI onClickMoveDetail={props.onClickMoveDetail} />
+          <BoardListCarouselUI
+            dataBest={props.dataBest}
+            onClickMoveDetail={props.onClickMoveDetail}
+          />
         </S.ListCarousel>
         <S.ListMain>
           <S.MainTitle>

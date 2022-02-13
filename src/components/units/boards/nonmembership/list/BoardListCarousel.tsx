@@ -1,49 +1,45 @@
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import "slick-carousel/slick/slick.css";
 import * as S from "./BoardListCarousel.emotion";
 import { MouseEvent } from "react";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../../commons/types/generated/types";
+import { FETCH_BOARD } from "./BoardList.queries";
 
 interface IProps {
   onClickMoveDetail: (e: MouseEvent<HTMLDivElement>) => void;
+  dataBest: any;
 }
 
-const FETCH_BOARDS_OFTHEBEST = gql`
-  query fetchBoardsOfTheBest {
-    fetchBoardsOfTheBest {
-      _id
-    }
-  }
-`;
-export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      likeCount
-    }
-  }
-`;
-
 export default function BoardListCarouselUI(props: IProps) {
-  const { data } = useQuery(FETCH_BOARDS_OFTHEBEST);
-  console.log(data?.fetchBoardsOfTheBest);
-
-  const { data: best1 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[0]?._id },
+  const { data: best1 } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: { boardId: props.dataBest?.fetchBoardsOfTheBest[0]?._id },
   });
-  const { data: best2 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[1]?._id },
+  const { data: best2 } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: { boardId: props.dataBest?.fetchBoardsOfTheBest[1]?._id },
   });
-  const { data: best3 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[2]?._id },
+  const { data: best3 } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: { boardId: props.dataBest?.fetchBoardsOfTheBest[2]?._id },
   });
-  const { data: best4 } = useQuery(FETCH_BOARD, {
-    variables: { boardId: data?.fetchBoardsOfTheBest[3]?._id },
+  const { data: best4 } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: { boardId: props.dataBest?.fetchBoardsOfTheBest[3]?._id },
   });
-  console.log("분활 아이디" + best1, best2, best3, best4);
 
   const settings = {
     dots: false,
