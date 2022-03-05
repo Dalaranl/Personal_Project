@@ -4,13 +4,22 @@ import LayoutNavigationUI from "./navigation.presenter";
 export default function LayoutNavigation() {
   const router = useRouter();
 
+  const onClickMoveToHome = () => {
+    router.push("/");
+  };
+
   const onClickMoveToFreeboard = () => {
     router.push(`/boards/list`);
   };
 
-  const onClickMoveToHome = () => {
-    router.push("/");
+  const onClickMoveToMyProfile = () => {
+    router.push("/mypage");
   };
+
+  const onClickMoveToUsed = () => {
+    router.push("/used/list");
+  };
+
   const onClickMoveToGiphy = () => {
     router.push("/giphy");
   };
@@ -23,6 +32,8 @@ export default function LayoutNavigation() {
       onClickMoveToHome={onClickMoveToHome}
       onClickMoveToGiphy={onClickMoveToGiphy}
       onClickMoveToGiphyHistory={onClickMoveToGiphyHistory}
+      onClickMoveToUsed={onClickMoveToUsed}
+      onClickMoveToMyProfile={onClickMoveToMyProfile}
     />
   );
 }

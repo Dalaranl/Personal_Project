@@ -5,6 +5,8 @@ interface IProps {
   onClickMoveToHome: () => void;
   onClickMoveToGiphy: () => void;
   onClickMoveToGiphyHistory: () => void;
+  onClickMoveToUsed: () => void;
+  onClickMoveToMyProfile: () => void;
 }
 
 export default function LayoutNavigationUI(props: IProps) {
@@ -28,7 +30,7 @@ export default function LayoutNavigationUI(props: IProps) {
       <div className="navWrapper">
         <S.MyPageButton
           className="myPage"
-          onClick={props.onClickMoveToFreeboard}
+          onClick={props.onClickMoveToMyProfile}
         >
           <S.MypageIcon
             xmlns="http://www.w3.org/2000/svg"
@@ -67,10 +69,7 @@ export default function LayoutNavigationUI(props: IProps) {
         </S.FreeBoardButton>
       </div>
       <div className="navWrapper">
-        <S.MarketButton
-          className="myMarket"
-          onClick={props.onClickMoveToFreeboard}
-        >
+        <S.MarketButton className="myMarket" onClick={props.onClickMoveToUsed}>
           <S.MarketIcon
             xmlns="http://www.w3.org/2000/svg"
             width="16"

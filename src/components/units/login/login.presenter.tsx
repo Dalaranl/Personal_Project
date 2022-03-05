@@ -2,7 +2,7 @@ import * as S from "./login.emotions";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
-import { ChangeEvent, RefObject } from "react";
+import { ChangeEvent, KeyboardEvent, RefObject } from "react";
 import RouterModal from "./routerModal";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -19,6 +19,12 @@ interface IProps {
 }
 
 export default function LoginUI(props: IProps) {
+  const onKeyPressLogin = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      props.onClickLogin();
+    }
+  };
+
   return (
     <S.Wrapper>
       <RouterModal
@@ -50,6 +56,7 @@ export default function LoginUI(props: IProps) {
             <input
               type="password"
               name="password"
+              onKeyPress={onKeyPressLogin}
               onChange={props.onChangeInput}
             />
           </div>

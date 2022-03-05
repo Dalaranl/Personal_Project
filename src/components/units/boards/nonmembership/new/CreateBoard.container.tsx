@@ -12,8 +12,6 @@ import CreateBoardUI from "./CreateBoard.presenter";
 import { CREAT_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./CreateBoard.queries";
 import { IPropsCreateBoard } from "./CreateBoard.types";
 
-const STORAGE = "https://storage.googleapis.com/";
-
 export default function CreateBoard(props: IPropsCreateBoard) {
   const router = useRouter();
   const [createBoard] = useMutation<
@@ -180,14 +178,13 @@ export default function CreateBoard(props: IPropsCreateBoard) {
 
     try {
       const result = await uploadFile({ variables: { file } });
-      console.log(result.data?.uploadFile.url);
 
       if (props.isEdit) {
         setEditImages((prev) => [...prev, result.data?.uploadFile.url]);
         return;
       }
 
-      setImgUrl(STORAGE + result.data?.uploadFile.url);
+      setImgUrl(result.data?.uploadFile.url);
       setImages((prev) => [...prev, String(result.data?.uploadFile.url)]);
     } catch (error: any) {
       setModalMessage((prev) => "사진 등록에 실패하였습니다.");

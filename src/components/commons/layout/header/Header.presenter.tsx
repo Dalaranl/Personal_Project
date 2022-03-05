@@ -1,66 +1,68 @@
-import styled from "@emotion/styled";
-
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 6vh;
-
-  display: flex;
-
-  background-color: #303136;
-
-  #blank {
-    width: 87.4%;
-    height: 100%;
-  }
-`;
-const LogInfoWrapper = styled.div`
-  width: 12.6%;
-  height: 100%;
-
-  display: flex;
-
-  div {
-    width: 50%;
-    height: 100%;
-
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-
-  button {
-    width: 90%;
-    height: 90%;
-
-    border: none;
-    font-size: 1rem;
-
-    color: rgb(200, 200, 200);
-    background-color: rgba(50, 50, 50, 0.5);
-
-    :hover {
-      background-color: rgba(150, 150, 150, 0.8);
-    }
-  }
-`;
+import { useContext } from "react";
+import { GlobalContext } from "../../../../../pages/_app";
+import { IQuery } from "../../../../commons/types/generated/types";
+import { useFetchUserInfo } from "../../hooks/useFetchUserInfo";
+import * as S from "./Header.emotions";
+import PaymentModal from "./paymentModal";
 
 interface IProps {
   onClickCreate: () => void;
   onClickLogin: () => void;
+  onClickLogout: () => void;
+  handleClose: () => void;
+  onClickOpenModal: () => void;
+  modal: boolean;
+  data: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
 }
 
 export default function LayoutHeaderUI(props: IProps) {
+  const { accessToken } = useContext(GlobalContext);
+  const { data } = useFetchUserInfo();
+  const loggedInfo = data?.fetchUserLoggedIn;
+
   return (
-    <Wrapper>
-      <div id="blank"></div>
-      <LogInfoWrapper>
-        <div>
-          <button onClick={props.onClickLogin}>로그인</button>
-        </div>
-        <div>
-          <button onClick={props.onClickCreate}>회원가입</button>
-        </div>
-      </LogInfoWrapper>
-    </Wrapper>
+    <S.Wrapper>
+      <PaymentModal modal={props.modal} handleClose={props.handleClose} />
+      {accessToken ? (
+        <>
+          <div id="login" />
+          <S.LoginWrapper>
+            <S.Profile>
+              <img
+                src={loggedInfo?.picture || ""}
+                onError={(e) => {
+                  e.currentTarget.src = "/img/defaultProfile.jpeg";
+                }}
+              />
+            </S.Profile>
+            <S.UserName>
+              <span>{loggedInfo?.name}</span>
+            </S.UserName>
+            <S.UserPoint>
+              <S.Icon />
+              <span>{loggedInfo?.userPoint?.amount}P</span>
+            </S.UserPoint>
+            <S.ChargeWrapper>
+              <button onClick={props.onClickOpenModal}>+충전</button>
+            </S.ChargeWrapper>
+            <S.Logout>
+              <button onClick={props.onClickLogout}>로그아웃</button>
+            </S.Logout>
+          </S.LoginWrapper>
+        </>
+      ) : (
+        <>
+          <div id="blank" />
+          <S.LogInfoWrapper>
+            <div>
+              <button onClick={props.onClickLogin}>로그인</button>
+            </div>
+            <div>
+              <button onClick={props.onClickCreate}>회원가입</button>
+            </div>
+          </S.LogInfoWrapper>
+        </>
+      )}
+    </S.Wrapper>
   );
 }

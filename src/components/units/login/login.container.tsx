@@ -1,22 +1,20 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useContext, useRef, useState } from "react";
+import { GlobalContext } from "../../../../pages/_app";
 import {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../../commons/types/generated/types";
 import LoginUI from "./login.presenter";
-
-const LOGIN_USER = gql`
-  mutation loginUser($password: String!, $email: String!) {
-    loginUser(password: $password, email: $email) {
-      accessToken
-    }
-  }
-`;
+import { LOGIN_USER } from "./login.queries";
 
 export default function Login() {
   const router = useRouter();
+  // const [loginUser] = useMutation<
+  //   Pick<IMutation, "loginUser">,
+  //   IMutationLoginUserArgs
+  // >(LOGIN_USER);
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
@@ -30,6 +28,7 @@ export default function Login() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const { setIsLogin, setAccessToken } = useContext(GlobalContext);
 
   const handleClose = () => {
     setModal(false);
@@ -56,9 +55,11 @@ export default function Login() {
           email,
         },
       });
+      const accessToken = result.data?.loginUser.accessToken;
 
-      console.log(result);
+      if (setAccessToken) setAccessToken(accessToken || "");
 
+      setIsLogin && setIsLogin(true);
       setModalMessage("뮤즈대쉬에 오신것을 환영합니다!");
       setModal(true);
       setIsSuccess(true);

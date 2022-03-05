@@ -41,7 +41,7 @@ export default function Detail(props: IProps) {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   useEffect(() => {
-    setImgUrl((prev) => STORAGE + data?.fetchBoard.images[number]);
+    setImgUrl(data?.fetchBoard.images[number]);
   }, [number]);
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,

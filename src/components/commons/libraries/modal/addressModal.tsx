@@ -22,9 +22,6 @@ interface IProps {
 }
 
 export default function DaumPostModal(props: IProps) {
-  //   const handleOpen = () => setOpen(true);
-  //   const handleClose = () => setOpen(false);
-
   const onCompletDaumPostcomde = (data: any) => {
     props.onChangeAddress(String(data.address), String(data.zonecode));
     props.SetIsDaumPost();
