@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BsCoin } from "react-icons/Bs";
 
 export const Wrapper = styled.div`
   width: 100vw;
@@ -103,12 +102,6 @@ export const UserPoint = styled.div`
     font-size: 1.2rem;
     color: white;
   }
-`;
-export const Icon = styled(BsCoin)`
-  width: 12%;
-  height: 100%;
-
-  color: white;
 `;
 
 export const ChargeWrapper = styled.div`

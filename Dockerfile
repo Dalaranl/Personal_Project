@@ -1,7 +1,7 @@
-FROM node:16.13.1
+FROM node:16
 
-WORKDIR /class_build/
-COPY . /class_build/
+WORKDIR /freeboard/
+COPY . /freeboard/
 
 RUN yarn install
 RUN yarn build:ssr

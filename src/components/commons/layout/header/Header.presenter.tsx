@@ -39,7 +39,6 @@ export default function LayoutHeaderUI(props: IProps) {
               <span>{loggedInfo?.name}</span>
             </S.UserName>
             <S.UserPoint>
-              <S.Icon />
               <span>{loggedInfo?.userPoint?.amount}P</span>
             </S.UserPoint>
             <S.ChargeWrapper>
