@@ -48,7 +48,6 @@ export default function UpdateInquireAnswer(props: IProps) {
   };
 
   const onClickUpdateAnswer = async () => {
-    console.log(props._id);
     try {
       await updateUseditemQuestionAnswer({
         variables: {

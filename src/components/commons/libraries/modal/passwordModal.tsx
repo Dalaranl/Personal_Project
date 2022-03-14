@@ -67,9 +67,6 @@ interface IProps {
 }
 
 export default function PasswordModal(props: IProps) {
-  //   const handleOpen = () => setOpen(true);
-  //   const handleClose = () => setOpen(false);
-
   return (
     <div>
       <Modal

@@ -7,10 +7,10 @@ export default function BoardDetail() {
   const [pushBoardDetail, setPushBoardDetail] = useState(
     String(router.query.boardid)
   );
-  console.log(pushBoardDetail);
+
   const RouterPushDetail = (e: MouseEvent<HTMLDivElement>) => {
     setPushBoardDetail((prev) => e.currentTarget.id);
-    history.pushState("", null, e.currentTarget.id);
+    history.pushState("", e.currentTarget.id);
   };
 
   return (

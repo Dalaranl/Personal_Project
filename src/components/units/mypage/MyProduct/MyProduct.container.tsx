@@ -37,7 +37,7 @@ export function MyProduct() {
   const { data: picked } = useQuery<
     Pick<IQuery, "fetchUseditemsIPicked">,
     IQueryFetchUseditemsIPickedArgs
-  >(FETCH_USEDITEMS_IPICKED);
+  >(FETCH_USEDITEMS_IPICKED, { variables: { search: "" } });
   const { data: pickedCount, refetch: pickedRefetch } = useQuery<
     Pick<IQuery, "fetchUseditemsCountIPicked">
   >(FETCH_USEDITEMS_COUNTIPICKED);
@@ -45,20 +45,28 @@ export function MyProduct() {
   const [isSold, setIsSold] = useState(true);
   const [isBought, setIsBought] = useState(false);
   const [isPicked, setIsPicked] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const [search, setSearch] = useState("");
 
   const onClickIsSold = () => {
+    setKeyword("");
+    setSearch("");
     setIsSold(true);
     setIsBought(false);
     setIsPicked(false);
   };
 
   const onClickIsBought = () => {
+    setKeyword("");
+    setSearch("");
     setIsBought(true);
     setIsSold(false);
     setIsPicked(false);
   };
 
   const onClickIsPicked = () => {
+    setKeyword("");
+    setSearch("");
     setIsPicked(true);
     setIsSold(false);
     setIsBought(false);
@@ -66,19 +74,22 @@ export function MyProduct() {
 
   const onChangeSoldPage = (page: number, pageSize: number) => {
     soldRefetch({
-      page,
+      search: keyword,
+      page: 1,
     });
   };
 
   const onChangeBoughtPage = (page: number, pageSize: number) => {
     boughtRefetch({
-      page,
+      search: keyword,
+      page: 1,
     });
   };
 
   const onChangePickedPage = (page: number, pageSize: number) => {
     pickedRefetch({
-      page,
+      search: keyword,
+      page: 1,
     });
   };
 
@@ -105,14 +116,17 @@ export function MyProduct() {
         page: 1,
       });
     }
+    setKeyword(el);
   }, 500);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
     getDebounce(e.target.value);
   };
 
   return (
     <MyProductUI
+      search={search}
       sold={sold}
       soldCount={soldCount?.fetchUseditemsCountISold}
       bought={bought}

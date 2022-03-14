@@ -12,7 +12,11 @@ export default function UsedSearch() {
 
   return (
     <S.Search>
-      <S.SearchInput onChange={onChangeSearch} onKeyPress={onPressSearch} />
+      <S.SearchInput
+        onChange={onChangeSearch}
+        onKeyPress={onPressSearch}
+        placeholder="Search"
+      />
       <S.SearchBtn onClick={onClickSearch}>검색</S.SearchBtn>
     </S.Search>
   );

@@ -14,15 +14,13 @@ interface IProps {
 }
 
 export default function DetailListScroll(props: IProps) {
-  const { loading, data, fetchMore, refetch } = useQuery<
+  const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS, {
     variables: { page: 1 },
   });
-  const [keyword, setKeyword] = useState<string>();
-
-  if (loading) return "Loading...";
+  const [keyword, setKeyword] = useState<string>("");
 
   const getDebounce = _.debounce((el) => {
     refetch({ search: el, page: 1 });
@@ -41,7 +39,7 @@ export default function DetailListScroll(props: IProps) {
         page: Math.ceil(data.fetchBoards.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchBoards)
+        if (!fetchMoreResult?.fetchBoards)
           return { fetchBoards: [...prev.fetchBoards] };
 
         return {

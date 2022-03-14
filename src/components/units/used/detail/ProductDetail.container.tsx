@@ -9,7 +9,6 @@ import {
 export const ProductDetailContext = createContext<IProductDetailContext>({});
 
 export default function ProductDetail(props: IPropsProductDetail) {
-  console.log(props.data?.fetchUseditem.images);
   const router = useRouter();
   const [itemInfo, setItemInfo] = useState({
     _id: props.data?.fetchUseditem._id || "",

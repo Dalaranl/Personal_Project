@@ -1,4 +1,9 @@
-const Dot = ({ num, scrollIndex }) => {
+interface IPropsDot {
+  scrollIndex: number;
+  num: number;
+}
+
+const Dot = ({ num, scrollIndex }: IPropsDot) => {
   return (
     <div
       style={{
@@ -14,7 +19,11 @@ const Dot = ({ num, scrollIndex }) => {
   );
 };
 
-const Dots = ({ scrollIndex }) => {
+interface IPropsDots {
+  scrollIndex: number;
+}
+
+const Dots = ({ scrollIndex }: IPropsDots) => {
   return (
     <div style={{ position: "fixed", top: "50%", right: 100 }}>
       <div

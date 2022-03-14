@@ -1,15 +1,21 @@
 import * as S from "../../../src/components/units/giphy/Giphy.emotion";
 import GiphyModal from "../../../src/components/commons/libraries/modal/GiphyModal";
 import { MouseEvent, useEffect, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  DocumentData,
+} from "firebase/firestore/lite";
 import { firebaseApp } from "../../_app";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
 export default function GiphyHistoryPage() {
   const [isClick, setIsClick] = useState(false);
   const [clickId, setClickId] = useState("");
   let ip = "";
-  const [docs, setDocs] = useState([]);
+  const [docs, setDocs] = useState<DocumentData[]>([]);
 
   const handleClose = () => {
     setIsClick((prev) => false);
@@ -56,7 +62,7 @@ export default function GiphyHistoryPage() {
       <div id="result">
         {docs &&
           docs.map((el) => (
-            <div key={el.urlHistory} style={{ width: "27vw", height: "33vh" }}>
+            <div key={uuidv4()} style={{ width: "27vw", height: "33vh" }}>
               <S.RsultImg
                 src={el.urlHistory}
                 id={el.urlHistory}

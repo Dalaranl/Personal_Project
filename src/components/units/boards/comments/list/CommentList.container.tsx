@@ -15,7 +15,7 @@ import {
 
 interface IProps {
   pushBoardDetail: string;
-  datas: Pick<IQuery, "fetchBoardComments">;
+  datas: Pick<IQuery, "fetchBoardComments"> | undefined;
 }
 
 export default function CommentList(props: IProps) {

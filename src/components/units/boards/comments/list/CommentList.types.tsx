@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../../commons/types/generated/types";
 
 export interface IPropsCommentListUI {
-  datas: Pick<IQuery, "fetchBoardComments">;
+  datas: Pick<IQuery, "fetchBoardComments"> | undefined;
   modal: boolean;
   passModal: boolean;
   modalMessage: string;

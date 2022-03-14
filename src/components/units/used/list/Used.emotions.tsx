@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { IPropsSoldBtn, IPropsUnsoldBtn } from "./Used.types";
+import { IPropsSoldBtn } from "./Used.types";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -129,6 +129,23 @@ export const Search = styled.div`
 export const SearchInput = styled.input`
   width: 75%;
   height: 100%;
+
+  background: none;
+  border: 1px solid gray;
+
+  border-radius: 10px 0px 0px 10px;
+  padding-left: 10px;
+
+  color: aliceblue;
+
+  ::placeholder {
+    color: gray;
+  }
+
+  :focus {
+    outline: none;
+    border: 1px solid aliceblue;
+  }
 `;
 
 export const Calender = styled.div`
@@ -143,6 +160,9 @@ export const Calender = styled.div`
 export const SearchBtn = styled.button`
   width: 20%;
   height: 100%;
+
+  background-color: aliceblue;
+  border-radius: 0px 10px 10px 0px;
 `;
 
 // 목록 선택 버튼
@@ -173,8 +193,8 @@ export const UnsoldBtn = styled.button`
   border: 1px solid gray;
   border-bottom: none;
 
-  background-color: ${(props: IPropsUnsoldBtn) =>
-    props.isUnsold ? "#33363d" : "#747a8a"};
+  background-color: ${(props: IPropsSoldBtn) =>
+    props.isSold ? "#747a8a" : "#33363d"};
 
   :hover {
     cursor: pointer;

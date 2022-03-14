@@ -14,7 +14,7 @@ export default function CommentsWriteUI(props: IPropsCommentsWriteUI) {
       color: "#ff6d75",
     },
   });
-  const { writer, password, rating } = props.writerInfo;
+  const { writer, password } = props.writerInfo;
 
   return (
     <S.Wrapper>
@@ -43,11 +43,11 @@ export default function CommentsWriteUI(props: IPropsCommentsWriteUI) {
           />
           <StyledRating
             name="rating"
-            defaultValue={Number(rating)}
+            defaultValue={Number(props.rating)}
             precision={0.5}
             icon={<FavoriteIcon fontSize="large" />}
             emptyIcon={<FavoriteBorderIcon fontSize="large" />}
-            onChange={props.onChangeWriterInfo}
+            onChange={props.onChangeRating}
           />
         </S.WriterInput>
         <S.Submit>

@@ -35,7 +35,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   const [images, setImages] = useState<string[]>([]);
   const [editImages, setEditImages] = useState<string[]>([]);
   useEffect(() => {
-    if (props.data) {
+    if (props.data?.fetchBoard.images) {
       setEditImages([...editImages, ...props.data?.fetchBoard.images]);
     }
   }, []);
@@ -50,7 +50,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   });
   const { zipcode, address, addressDetail } = adDress;
   const fileRef = useRef<HTMLInputElement>(null);
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState<string | undefined>("");
 
   // Modal
   const [modalMessage, setModalMessage] = useState("");
@@ -66,13 +66,16 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   const [isReset, setIsReset] = useState(false);
 
   useEffect(() => {
-    document.getElementById("movePage").style.left = `${wrapperSize}vw`;
+    const movePage = document.getElementById("movePage");
+    if (movePage) movePage.style.left = `${wrapperSize}vw`;
   }, [isNext]);
   useEffect(() => {
-    document.getElementById("movePage").style.left = `${wrapperSize}vw`;
+    const movePage = document.getElementById("movePage");
+    if (movePage) movePage.style.left = `${wrapperSize}vw`;
   }, [isPrev]);
   useEffect(() => {
-    document.getElementById("movePage").style.left = `${wrapperSize}vw`;
+    const movePage = document.getElementById("movePage");
+    if (movePage) movePage.style.left = `${wrapperSize}vw`;
   }, [isReset]);
 
   const onClickNextPage = () => {
@@ -144,7 +147,6 @@ export default function CreateBoard(props: IPropsCreateBoard) {
   };
   const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContents((prev) => e.target.value);
-    console.log(contents);
   };
   const onChangeAddress = (address: string, zonecode: string) => {
     setAddress({
@@ -180,7 +182,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       const result = await uploadFile({ variables: { file } });
 
       if (props.isEdit) {
-        setEditImages((prev) => [...prev, result.data?.uploadFile.url]);
+        setEditImages((prev) => [...prev, result.data?.uploadFile.url || ""]);
         return;
       }
 

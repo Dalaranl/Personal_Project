@@ -54,7 +54,7 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                     name="writer"
                     type="text"
                     placeholder="닉네임를 입력하세요."
-                    defaultValue={props.data?.fetchBoard.writer}
+                    defaultValue={props.data?.fetchBoard.writer || ""}
                     readOnly={!!props.data?.fetchBoard.writer}
                     onChange={props.onChangeUserInfo}
                   />
@@ -129,7 +129,7 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                   readOnly
                   value={
                     zipcode ||
-                    props.data?.fetchBoard?.boardAddress.zipcode ||
+                    props.data?.fetchBoard.boardAddress?.zipcode ||
                     ""
                   }
                 />
@@ -142,7 +142,7 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                   readOnly
                   value={
                     address ||
-                    props.data?.fetchBoard?.boardAddress.address ||
+                    props.data?.fetchBoard?.boardAddress?.address ||
                     ""
                   }
                 />
@@ -155,7 +155,7 @@ export default function CreateBoardUI(props: IPropsCreateBoardUI) {
                   onChange={props.onChangeDetailAddress}
                   defaultValue={
                     addressDetail ||
-                    props.data?.fetchBoard?.boardAddress.addressDetail ||
+                    props.data?.fetchBoard?.boardAddress?.addressDetail ||
                     ""
                   }
                 />

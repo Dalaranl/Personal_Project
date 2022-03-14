@@ -32,7 +32,6 @@ export default function CommentScroll(props: IProps) {
   });
 
   function onLoadMore() {
-    console.log(data);
     if (!data) return;
 
     fetchMore({
@@ -40,7 +39,7 @@ export default function CommentScroll(props: IProps) {
         page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!Object.keys(prev).length) return;
+        // if (!Object.keys(prev).length) return;
 
         if (!fetchMoreResult?.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };

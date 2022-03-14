@@ -70,7 +70,6 @@ export default function InfiniteAnswer() {
       });
     }
   };
-  console.log(data);
 
   return (
     <S.ListWrapper>

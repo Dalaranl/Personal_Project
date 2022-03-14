@@ -1,4 +1,7 @@
-export const checkFileValidation = (images: (string | File)[], file: File) => {
+export const checkFileValidation = (
+  images: (string | File | undefined)[],
+  file: File | undefined
+) => {
   if (images.includes(file)) {
     alert("중복된 파일입니다.");
     return false;

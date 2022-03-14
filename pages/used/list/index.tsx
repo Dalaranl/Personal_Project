@@ -12,36 +12,27 @@ import { IUsedListContext } from "../../../src/components/units/used/list/Used.t
 export const UsedListContext = createContext<IUsedListContext>({});
 
 const UsedPage = () => {
+  const [isSold, setIsSold] = useState(false);
   const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS, {
-    variables: { isSoldout: false, page: 1, search: "" },
-  });
-  const {
-    data: dataSoldout,
-    fetchMore: fetchMoreSoldout,
-    refetch: refetchSoldout,
-  } = useQuery(FETCH_USED_ITEMS, {
-    variables: { isSoldout: true, page: 1, search: "" },
+    variables: { isSoldout: isSold, page: 1, search: "" },
   });
 
   const [search, setSearch] = useState("");
   const [keyword, setKeyword] = useState("");
-  const [isUnsold, setIsUnsold] = useState(true);
-  const [isSold, setIsSold] = useState(false);
+  const [isDateSearchMore, setIsDateSearchMore] = useState(true);
 
   const onPressSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (isUnsold) refetch({ isSoldout: false, search, page: 1 });
-      if (isSold) refetchSoldout({ isSoldout: true, search, page: 1 });
+      refetch({ isSoldout: isSold, search, page: 1 });
       setKeyword(search);
     }
   };
 
   const onClickSearch = () => {
-    if (isUnsold) refetch({ isSoldout: false, search, page: 1 });
-    if (isSold) refetchSoldout({ isSoldout: true, search, page: 1 });
+    refetch({ isSoldout: isSold, search, page: 1 });
     setKeyword(search);
   };
 
@@ -53,15 +44,14 @@ const UsedPage = () => {
     setKeyword,
     onClickSearch,
     onPressSearch,
-    isUnsold,
-    setIsUnsold,
     isSold,
     setIsSold,
-    dataSoldout,
+    setIsDateSearchMore,
   };
 
   function onLoadMore() {
     if (!data) return;
+    if (!isDateSearchMore) return;
 
     fetchMore({
       variables: {
@@ -80,28 +70,9 @@ const UsedPage = () => {
     });
   }
 
-  function onLoadMoreSoldout() {
-    if (!data) return;
-
-    fetchMoreSoldout({
-      variables: {
-        page: Math.ceil(data?.fetchUseditems.length / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchUseditems)
-          return { fetchUseditems: [...prev.fetchUseditems] };
-        return {
-          fetchUseditems: [
-            ...prev?.fetchUseditems,
-            ...fetchMoreResult?.fetchUseditems,
-          ],
-        };
-      },
-    });
-  }
   return (
     <UsedListContext.Provider value={value}>
-      <Used onLoadMore={onLoadMore} onLoadMoreSoldout={onLoadMoreSoldout} />
+      <Used onLoadMore={onLoadMore} />
     </UsedListContext.Provider>
   );
 };

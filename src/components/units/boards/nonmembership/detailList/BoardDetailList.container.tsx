@@ -7,7 +7,7 @@ import BoardDetailListUI from "./BoardDetailList.presenter";
 interface IProps {
   RouterPushDetail: (e: MouseEvent<HTMLDivElement>) => void;
   onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
-  data: Pick<IQuery, "fetchBoards">;
+  data: Pick<IQuery, "fetchBoards"> | undefined;
   keyword: string;
 }
 

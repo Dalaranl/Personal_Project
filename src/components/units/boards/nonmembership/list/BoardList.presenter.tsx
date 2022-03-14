@@ -1,10 +1,10 @@
 import * as S from "./BoardList.emotion";
-import { IPropsBoardList } from "./BoardList.types";
+import { IPropsBoardListUI } from "./BoardList.types";
 import Pagination from "../../../../commons/libraries/pagination/Pagination";
 import BoardListCarouselUI from "./BoardListCarousel";
 import { v4 as uuidv4 } from "uuid";
 
-export default function BoardListUI(props: IPropsBoardList) {
+export default function BoardListUI(props: IPropsBoardListUI) {
   return (
     <S.Wrapper>
       <S.ListBody>

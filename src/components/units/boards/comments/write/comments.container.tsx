@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, SyntheticEvent, useState } from "react";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
@@ -18,9 +18,9 @@ export default function CommentsWrite(props: IProps) {
   const [writerInfo, setWriterInfo] = useState({
     writer: "",
     password: "",
-    rating: 0,
   });
-  const { writer, password, rating } = writerInfo;
+  const [rating, setRating] = useState(0);
+  const { writer, password } = writerInfo;
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
     IMutationCreateBoardCommentArgs
@@ -28,13 +28,20 @@ export default function CommentsWrite(props: IProps) {
 
   // textarea 사이즈 조절
   const resize = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    document.getElementById("textArea").style.height = "65.344px";
-    document.getElementById("textArea").style.height =
-      12 + document.getElementById("textArea").scrollHeight + "px";
+    const textarea = document.getElementById("textArea");
+    if (!textarea) return;
+    textarea.style.height = "65.344px";
+    textarea.style.height = 12 + textarea.scrollHeight + "px";
   };
 
   const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(e.target.value);
+  };
+  const onChangeRating = (
+    e: SyntheticEvent<Element, Event>,
+    value: number | null
+  ) => {
+    setRating(value || 0);
   };
   const onChangeWriterInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,7 +53,6 @@ export default function CommentsWrite(props: IProps) {
 
   const onClickSubmit = async () => {
     try {
-      console.log(contents);
       await createBoardComment({
         variables: {
           boardId: props.pushBoardDetail,
@@ -64,16 +70,15 @@ export default function CommentsWrite(props: IProps) {
           },
         ],
       });
-    } catch (error: any) {
-      alert(error.message);
-    } finally {
       setContents((prev) => "");
       setWriterInfo({
         ...writerInfo,
         writer: "",
         password: "",
-        rating: 0,
       });
+      setRating(0);
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
@@ -82,9 +87,11 @@ export default function CommentsWrite(props: IProps) {
       resize={resize}
       onChangeContents={onChangeContents}
       onChangeWriterInfo={onChangeWriterInfo}
+      onChangeRating={onChangeRating}
       onClickSubmit={onClickSubmit}
       contents={contents}
       writerInfo={writerInfo}
+      rating={rating}
     />
   );
 }

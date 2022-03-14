@@ -45,7 +45,6 @@ export default function Giphy() {
         return el.images.original.url;
       })
     );
-    console.log(data);
   };
 
   // Clips Query
@@ -91,7 +90,7 @@ export default function Giphy() {
 
   const getIp = async () => {
     const result = await axios.get("https://geolocation-db.com/json/");
-    console.log(result);
+
     setIp(result.data.IPv4);
   };
 
@@ -107,12 +106,9 @@ export default function Giphy() {
   // 상태 관리
   const onChangeUserInput = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(encodeURIComponent(e.target.value));
-
-    console.log(userInput);
   };
   const onSelectRating = (e: ChangeEvent<HTMLSelectElement>) => {
     setRating(e.target.value);
-    console.log(rating);
   };
   const onChangeIsGIF = () => {
     setIsGif((prev) => true);

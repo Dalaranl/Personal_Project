@@ -3,7 +3,7 @@ import { IQuery } from "../../../../../commons/types/generated/types";
 
 export interface IPropsCreateBoard {
   isEdit: boolean;
-  data: Pick<IQuery, "fetchBoard">;
+  data: Pick<IQuery, "fetchBoard"> | undefined;
 }
 
 export interface IPropsCreateBoardUI {
@@ -39,9 +39,9 @@ export interface IPropsCreateBoardUI {
   isDaumPost: boolean;
   modalMessage: string;
   isEdit: boolean;
-  data: Pick<IQuery, "fetchBoard">;
+  data: Pick<IQuery, "fetchBoard"> | undefined;
   fileRef: any;
-  imgUrl: string;
+  imgUrl: string | undefined;
   images: string[];
   editImages: string[];
 }

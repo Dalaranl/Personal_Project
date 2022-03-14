@@ -27,7 +27,6 @@ export default function Pagination(props: IProps) {
     });
   };
 
-  console.log(`start: ${startPage}, Id: ${pageId}`);
   const onClickPrevPage = () => {
     if (startPage <= 11) {
       setGoPrevPage((prev) => "");

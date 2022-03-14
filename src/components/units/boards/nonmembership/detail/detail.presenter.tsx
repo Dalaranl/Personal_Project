@@ -10,7 +10,7 @@ interface IPropsDetailUI {
   data?: Pick<IQuery, "fetchBoard">;
   isYoutube: boolean;
   pushBoardDetail: string;
-  datas: Pick<IQuery, "fetchBoardComments">;
+  datas: Pick<IQuery, "fetchBoardComments"> | undefined;
   imgUrl: string;
   number: number;
   modal: boolean;

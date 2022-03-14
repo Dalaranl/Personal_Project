@@ -5,6 +5,15 @@ export interface IPropsProductDetail {
   data: Pick<IQuery, "fetchUseditem"> | undefined;
 }
 
+export interface IPropsDetailPage {
+  usedItemData: {
+    name: string;
+    remarks: string;
+    contents: string;
+    images: [string];
+  };
+}
+
 export interface IProductDetailContext {
   itemInfo?: {
     _id: string;

@@ -22,7 +22,11 @@ export function MyProductUI(props: IPropsMyProductUI) {
           <span>찜 목록</span>
         </S.MyPick>
         <S.Search>
-          <S.SearchInput placeholder="검색" />
+          <S.SearchInput
+            placeholder="검색"
+            onChange={props.onChangeSearch}
+            value={props.search}
+          />
         </S.Search>
       </S.MainNav>
       <S.ListInfo>
@@ -62,7 +66,7 @@ export function MyProductUI(props: IPropsMyProductUI) {
               onChange={props.onChangeSoldPage}
               showSizeChanger={false}
               defaultPageSize={10}
-              defaultCurrent={4}
+              defaultCurrent={1}
               total={500}
             />
           </S.PageNation>

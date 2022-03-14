@@ -114,7 +114,7 @@ export default function Account() {
       passwordCheckMsg === ""
     ) {
       try {
-        const result = await createUser({
+        await createUser({
           variables: {
             createUserInput: {
               email,
@@ -126,7 +126,6 @@ export default function Account() {
         setIsSuccess(true);
         setModalMessage("뮤즈대쉬에 오신것을 환영합니다!");
         setModal(true);
-        console.log(result);
       } catch (error: any) {
         console.log(error.message);
       }

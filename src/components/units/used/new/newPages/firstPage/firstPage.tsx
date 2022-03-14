@@ -80,7 +80,6 @@ export default function CreateProductFirstPage() {
   };
 
   const onKeyDownDelete = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.key);
     if (e.key === "Backspace" && !tagInput.length) {
       if (!tags?.length) return;
 

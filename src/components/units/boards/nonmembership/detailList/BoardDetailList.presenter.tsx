@@ -4,7 +4,7 @@ import * as S from "./BoardDetailList.emotion";
 import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
-  data: Pick<IQuery, "fetchBoards">;
+  data: Pick<IQuery, "fetchBoards"> | undefined;
   keyword: string;
   RouterPushDetail: (e: MouseEvent<HTMLDivElement>) => void;
   onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;

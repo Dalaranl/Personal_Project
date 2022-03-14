@@ -17,6 +17,7 @@ export interface IContextMyPageContext {
   setIsMyPoint?: Dispatch<SetStateAction<boolean>>;
 }
 export interface IPropsMyProductUI {
+  search: string;
   isSold: boolean;
   isBought: boolean;
   isPicked: boolean;

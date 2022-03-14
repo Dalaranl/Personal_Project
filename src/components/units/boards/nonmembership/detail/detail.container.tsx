@@ -19,10 +19,8 @@ import { useRouter } from "next/router";
 
 interface IProps {
   pushBoardDetail: string;
-  datas: Pick<IQuery, "fetchBoardComments">;
+  datas: Pick<IQuery, "fetchBoardComments"> | undefined;
 }
-
-const STORAGE = "https://storage.googleapis.com/";
 
 export default function Detail(props: IProps) {
   const router = useRouter();
@@ -41,7 +39,7 @@ export default function Detail(props: IProps) {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   useEffect(() => {
-    setImgUrl(data?.fetchBoard.images[number]);
+    if (data?.fetchBoard.images) setImgUrl(data?.fetchBoard.images[number]);
   }, [number]);
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,
@@ -99,17 +97,18 @@ export default function Detail(props: IProps) {
   };
   const onClickPrev = () => {
     if (number === 0) {
-      setNumber((prev) => data?.fetchBoard.images.length);
+      if (data?.fetchBoard.images) setNumber(data?.fetchBoard.images.length);
     } else {
       setNumber((prev) => prev - 1);
     }
   };
   const onClickNext = () => {
-    if (number === data?.fetchBoard.images.length) {
-      setNumber((prev) => 0);
-    } else {
-      setNumber((prev) => prev + 1);
-    }
+    if (data?.fetchBoard.images)
+      if (number === data?.fetchBoard.images.length) {
+        setNumber((prev) => 0);
+      } else {
+        setNumber((prev) => prev + 1);
+      }
   };
 
   const onClickEdit = () => {

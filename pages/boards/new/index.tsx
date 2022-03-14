@@ -3,7 +3,7 @@ import CreateBoard from "../../../src/components/units/boards/nonmembership/new/
 
 interface IProps {
   isEdit: boolean;
-  data: Pick<IQuery, "fetchBoard">;
+  data: Pick<IQuery, "fetchBoard"> | undefined;
 }
 
 export default function NewPage(props: IProps) {

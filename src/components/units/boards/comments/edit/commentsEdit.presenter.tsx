@@ -15,7 +15,6 @@ export default function CommentsEditUI(props: IPropsCommentsEditUI) {
       color: "#ff6d75",
     },
   });
-  const { password, rating } = props.writerInfo;
 
   return (
     <S.Wrapper>
@@ -34,29 +33,28 @@ export default function CommentsEditUI(props: IPropsCommentsEditUI) {
         <S.WriterInput>
           <input
             readOnly
-            defaultValue={props.data.writer}
+            defaultValue={props.data.writer || ""}
             name="writer"
             type="text"
             maxLength={8}
             placeholder="작성자"
-            onChange={props.onChangeWriterInfo}
           />
           <input
             className="password"
-            value={password}
+            value={props.password}
             name="password"
             type="password"
             placeholder="비밀번호"
-            onChange={props.onChangeWriterInfo}
+            onChange={props.onChangePassword}
           />
           <StyledRating
             name="rating"
             defaultValue={props.data.rating}
-            value={rating}
+            value={props.rating}
             precision={0.5}
             icon={<FavoriteIcon fontSize="large" />}
             emptyIcon={<FavoriteBorderIcon fontSize="large" />}
-            onChange={props.onChangeWriterInfo}
+            onChange={props.onChangeRating}
           />
         </S.WriterInput>
         <S.Submit>

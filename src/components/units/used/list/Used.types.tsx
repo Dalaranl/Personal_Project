@@ -9,20 +9,22 @@ export interface IUsedListContext {
   setSearch?: Dispatch<SetStateAction<string>>;
   keyword?: string;
   setKeyword?: Dispatch<SetStateAction<string>>;
-  isUnsold?: boolean;
-  setIsUnsold?: Dispatch<SetStateAction<boolean>>;
   isSold?: boolean;
   setIsSold?: Dispatch<SetStateAction<boolean>>;
-  dataSoldout?: Pick<IQuery, "fetchUseditems"> | undefined;
+  setIsDateSearchMore?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IPropsUsed {
   onLoadMore: () => void;
-  onLoadMoreSoldout: () => void;
 }
 
 export interface IPropsUsedUI {
   data: Pick<IQuery, "fetchUseditemsOfTheBest"> | undefined;
+  start: number;
+  end: number;
+  isDate: boolean;
+  onChangeGetDate: (dates: any) => void;
+  onClickIsSold: () => void;
 }
 
 export interface IPropsUsedList {

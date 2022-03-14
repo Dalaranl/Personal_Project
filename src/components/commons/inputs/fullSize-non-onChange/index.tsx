@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Maybe } from "graphql/jsutils/Maybe";
-import { ChangeEvent } from "react";
 
 const Input = styled.input`
   width: 100%;
