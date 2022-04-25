@@ -1,4 +1,4 @@
-schema: http://backend05.codebootcamp.co.kr/graphql # you can also point to a GraphQL endpoint!
+schema: http://backend05.codebootcamp.co.kr/graphql15 # you can also point to a GraphQL endpoint!
 generates:
     ./src/commons/types/generated/types.ts:
         plugins:

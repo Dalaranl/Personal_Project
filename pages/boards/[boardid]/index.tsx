@@ -35,7 +35,7 @@ export default function BoardDetailPage(props: IPropsBoardDetailPage) {
 
 export const getServerSideProps = async (context: any) => {
   const result = await request(
-    "https://backend05.codebootcamp.co.kr/graphql",
+    "https://backend05.codebootcamp.co.kr/graphql15",
     FETCH_BOARD,
     { boardId: String(context.query.boardid) }
   );
