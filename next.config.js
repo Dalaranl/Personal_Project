@@ -12,7 +12,8 @@ module.exports = {
       process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
     NEXT_PUBLIC_FIREBASE_APPID: process.env.NEXT_PUBLIC_FIREBASE_APPID,
   },
-  trailingSlash: true,
+  trailingSlash: false,
+  assetPrefix: "/used",
   generateBuildId: () => "MuseDash",
   exportPathMap: () => ({
     "/": { page: "/" },
