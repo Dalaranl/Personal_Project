@@ -49,7 +49,7 @@ export default function DetailPage(props: IPropsDetailPage) {
 
 export const getServerSideProps = async (context: any) => {
   const result = await request(
-    "https://.codebootcamp.co.kr/graphql",
+    "https://backend05.codebootcamp.co.kr/graphql15",
     FETCH_USEDITEM,
     { useditemId: String(context.query.useditemid) }
   );
