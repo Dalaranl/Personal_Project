@@ -31,75 +31,84 @@ const DIVIDER_HEIGHT = 5;
 export default function App() {
   const outerDivRef = useRef<any>(null);
   const [scrollIndex, setScrollIndex] = useState(1);
+  const [isThrottling, setIsThrottling] = useState(false);
+  
+  const moveToPage = (deltaY: number) => {
+    const { scrollTop } = outerDivRef.current;
+    const pageHeight = window.innerHeight;
+
+    if (deltaY > 0) {
+      if (scrollTop >= 0 && scrollTop < pageHeight) {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight + DIVIDER_HEIGHT,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(2);
+      } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(3);
+      } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 3 + DIVIDER_HEIGHT * 3,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(4);
+      } else {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 4 + DIVIDER_HEIGHT * 4,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(4);
+      }
+    } else {
+      if (scrollTop >= 0 && scrollTop < pageHeight) {
+        outerDivRef.current?.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(1);
+      } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+        outerDivRef.current?.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(1);
+      } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 1 + DIVIDER_HEIGHT * 1,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(2);
+      } else {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
+          left: 0,
+          behavior: "smooth",
+        });
+        setScrollIndex(3);
+      }
+    }
+  }
 
   useEffect(() => {
     const wheelHandler = (e: { preventDefault: any; deltaY: number }) => {
       e.preventDefault();
-      const { deltaY } = e;
-      const { scrollTop } = outerDivRef.current;
-      const pageHeight = window.innerHeight;
-
-      if (deltaY > 0) {
-        if (scrollTop >= 0 && scrollTop < pageHeight) {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight + DIVIDER_HEIGHT,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(2);
-        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(3);
-        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight * 3 + DIVIDER_HEIGHT * 3,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(4);
-        } else {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight * 4 + DIVIDER_HEIGHT * 4,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(4);
-        }
-      } else {
-        if (scrollTop >= 0 && scrollTop < pageHeight) {
-          outerDivRef.current?.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(1);
-        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
-          outerDivRef.current?.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(1);
-        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight * 1 + DIVIDER_HEIGHT * 1,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(2);
-        } else {
-          outerDivRef.current?.scrollTo({
-            top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
-            left: 0,
-            behavior: "smooth",
-          });
-          setScrollIndex(3);
-        }
-      }
+      if (isThrottling) return;
+      moveToPage(e.deltaY)
+      setIsThrottling(true);
+      setTimeout(() => {
+        setIsThrottling(false);
+      }, 1500)
     };
     const outerDivRefCurrent = outerDivRef.current;
     if (outerDivRefCurrent)
@@ -109,7 +118,7 @@ export default function App() {
       if (outerDivRefCurrent)
         outerDivRefCurrent.removeEventListener("wheel", wheelHandler);
     };
-  }, []);
+  }, [isThrottling]);
 
   return (
     <Wrapper ref={outerDivRef}>
