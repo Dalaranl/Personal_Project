@@ -1,21 +1,16 @@
 import * as S from "../../../src/components/units/giphy/Giphy.emotion";
 import GiphyModal from "../../../src/components/commons/libraries/modal/GiphyModal";
 import { MouseEvent, useEffect, useState } from "react";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  DocumentData,
-} from "firebase/firestore/lite";
+import axios from "axios";
 import { firebaseApp } from "../../_app";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+import { doc, getDoc,getFirestore,
+  DocumentData, } from "firebase/firestore";
 
 export default function GiphyHistoryPage() {
   const [isClick, setIsClick] = useState(false);
   const [clickId, setClickId] = useState("");
-  let ip = "";
-  const [docs, setDocs] = useState<DocumentData[]>([]);
+  const [history, setHistory] = useState<DocumentData[]>([]);
 
   const handleClose = () => {
     setIsClick((prev) => false);
@@ -29,19 +24,22 @@ export default function GiphyHistoryPage() {
   useEffect(() => {
     const getIp = async () => {
       const result = await axios.get("https://geolocation-db.com/json/");
-
-      ip = result.data.IPv4;
+      const ip = result.data.IPv4
+      fetchImg(ip);
     };
-    getIp();
-    setTimeout(() => fetchImg(ip), 1500);
 
-    return console.log("unmount");
+    getIp();
   }, []);
 
   const fetchImg = async (ip: string) => {
-    const history = collection(getFirestore(firebaseApp), `history/ip/${ip}`);
-    const result = await getDocs(history);
-    setDocs(result.docs.map((el) => el.data()));
+    const firestore = getFirestore(firebaseApp);
+    const DB = firestore;
+    const docRef = doc(DB, "history", ip);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setHistory([...docSnap.data().history])
+    }
   };
 
   return (
@@ -60,12 +58,12 @@ export default function GiphyHistoryPage() {
         </S.History>
       </S.Header>
       <div id="result">
-        {docs &&
-          docs.map((el) => (
+        {history &&
+          history.map((el) => (
             <div key={uuidv4()} style={{ width: "27vw", height: "33vh" }}>
               <S.RsultImg
-                src={el.urlHistory}
-                id={el.urlHistory}
+                src={String(el)}
+                id={String(el)}
                 style={{ width: "100%", height: "100%" }}
                 onClick={onClickImg}
               />

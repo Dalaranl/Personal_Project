@@ -16,7 +16,7 @@ interface IProps {
 
 export default function Payment(props: IProps) {
   const { data } = useFetchUserInfo();
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1000);
   const [createPointTransactionOfLoading] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs

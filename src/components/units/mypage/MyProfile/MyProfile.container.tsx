@@ -124,7 +124,7 @@ export default function MyProfile() {
       window.location.reload();
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        alert(error.message);
         alert("수정에 실패하였습니다.");
       }
     }

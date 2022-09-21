@@ -37,6 +37,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
+
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
 
@@ -111,7 +112,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://backend05.codebootcamp.co.kr/graphql15",
+    uri: "https://backend07.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
   });

@@ -9,7 +9,6 @@ declare const window: typeof globalThis & {
 export default function DetailMap() {
   const { itemAddress } = useContext(ProductDetailContext);
 
-  console.log(itemAddress);
   useEffect(() => {
     const script = document.createElement("script"); // <script></script>
 

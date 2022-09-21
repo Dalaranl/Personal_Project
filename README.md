@@ -9,9 +9,9 @@ npm run dev
 # or
 yarn dev
 ```
-
+![](/public/img/readme/%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90-create_AdobeExpress%20(1).gif)
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
+<img width="1000" src="/public/img/readme/%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90-create_AdobeExpress%20(1).gif" href="자유게시판 create /">
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.

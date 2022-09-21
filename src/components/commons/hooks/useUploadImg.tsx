@@ -40,10 +40,9 @@ export function useUploadImages() {
             if (el === clickUrl) return img;
             else return el;
           });
-          // const readerEdit = readerImg;
-          // readerEdit.splice(index, 1, img);
-          const imagesEdit = images.map((el) => {
-            if (el === file) return img;
+         
+          const imagesEdit = images.map((el, targetIdx) => {
+            if (index === targetIdx) return file;
             else return el;
           });
 

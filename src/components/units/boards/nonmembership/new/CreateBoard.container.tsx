@@ -131,7 +131,6 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       addressDetail: "",
     });
     setContents((prev) => "");
-    console.log(userInfo);
     setWrapperSize((prev) => 15);
     setIsReset((prev) => !prev);
   };
@@ -216,7 +215,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       });
       router.push(`/boards/${result.data?.createBoard?._id}`);
     } catch (error: any) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
@@ -244,7 +243,7 @@ export default function CreateBoard(props: IPropsCreateBoard) {
       });
       router.push(`/boards/${router.query.boardid}`);
     } catch (error: any) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 

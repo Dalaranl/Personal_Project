@@ -40,7 +40,7 @@ export function useCreateUsedItem() {
       const resultUrl = resultsPromise.map((el) =>
         el.data ? el.data.uploadFile.url : ""
       );
-
+        
       const result = await createUsedItem({
         variables: {
           createUseditemInput: {

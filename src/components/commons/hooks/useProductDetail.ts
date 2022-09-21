@@ -75,7 +75,7 @@ export function useProductDetail() {
           cache.modify({
             fields: {
               fetchUseditemQuestions: (prev, { readField }) => {
-                const filteredPrev = prev.filter(
+                const filteredPrev:any = prev.filter(
                   (el: Reference | StoreObject | undefined) =>
                     readField("_id", el) !== deleteId
                 );
@@ -86,7 +86,7 @@ export function useProductDetail() {
         },
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) console.log(error.message);
     }
   };
 
@@ -164,7 +164,7 @@ export function useProductDetail() {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) console.log(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   };
 

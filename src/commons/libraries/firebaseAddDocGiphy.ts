@@ -1,10 +1,16 @@
-import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { firebaseApp } from "../../../pages/_app";
 
 export default async function FirebaseAddDocGiphy(url: string, ip: any) {
-  const history = collection(getFirestore(firebaseApp), `history/ip/${ip}`);
+  const firestore = getFirestore(firebaseApp);
+  const DB = firestore;
+  const docRef = doc(DB, "history", ip);
+  const docSnap = await getDoc(docRef);
 
-  await addDoc(history, {
-    urlHistory: url,
-  });
+  if (docSnap.exists()) {
+    await updateDoc(docRef, {history: [...docSnap.data().history, url]})
+
+  } else {
+    setDoc(doc(DB, "history", ip), {history: [url]});
+  }
 }

@@ -13,7 +13,7 @@ export default function Giphy() {
   const [isClick, setIsClick] = useState(false);
   const [clickId, setClickId] = useState("");
   const [ip, setIp] = useState("");
-
+  
   // Gif query
   const onClickTrending = async () => {
     const { data } = await axios.get("https://api.giphy.com/v1/gifs/trending", {

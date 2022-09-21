@@ -77,7 +77,7 @@ export function useUpdateUsedItem() {
     } catch (error) {
       if (error instanceof Error) {
         alert("수정에 실패하였습니다.");
-        console.log(error.message);
+        alert(error.message);
       }
     }
   };

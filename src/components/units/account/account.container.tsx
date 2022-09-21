@@ -127,7 +127,7 @@ export default function Account() {
         setModalMessage("뮤즈대쉬에 오신것을 환영합니다!");
         setModal(true);
       } catch (error: any) {
-        console.log(error.message);
+        alert(error.message);
       }
     } else {
       setModalMessage("회원가입 형식을 다시 확인해주세요.");
