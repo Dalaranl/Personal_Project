@@ -73,10 +73,6 @@
 <img width="100%" src="/public/img/readme/market_modify_delete.gif">
 <br>
 
-- 삼품 수정, 삭제
-<img width="100%" src="/public/img/readme/market_modify_delete.gif">
-<br>
-
 - 댓글 CRUD, 지도
 <img width="100%" src="/public/img/readme/market_answer_map.gif">
 <br>
@@ -99,7 +95,7 @@
 
 ## Giphy
 - 움짤 검색하기
-<img width="100%" src="/public/img/readme/giphy_openapi.gif">
+<img width="100%" src="/public/img/readme/giphy.gif">
 <br>
 
 - history
