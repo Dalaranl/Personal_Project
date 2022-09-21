@@ -89,10 +89,6 @@
 <img width="100%" src="/public/img/readme/권한분기.gif">
 <br>
 
-## 회원 가입
-<img width="100%" src="/public/img/readme/회원가입.gif">
-<br>
-
 ## Giphy
 - 움짤 검색하기
 <img width="100%" src="/public/img/readme/giphy.gif">
