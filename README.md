@@ -91,9 +91,9 @@
 
 ## Giphy
 - 움짤 검색하기
-<img width="100%" src="/public/img/readme/giphy.gif">
+<img width="100%" src="/public/img/readme/giphy_min.gif">
 <br>
 
 - history
-<img width="100%" src="/public/img/readme/giphy_history.gif">
+<img width="100%" src="/public/img/readme/giphy_history_min.gif">
 <br>
