@@ -52,7 +52,15 @@
 <img width="100%" src="/public/img/readme/freeboard_create_2.gif" href="자유게시판 글쓰기 페이지">
 </br>
 
+## 회원가입
+<img width="100%" src="/public/img/readme/회원가입.gif">
+</br>
+
 ## 중고마켓
+- 권한분기, 로그인
+<img width="100%" src="/public/img/readme/권한분기.gif">
+<br>
+
 -  찜하기, 날짜 검색, 무한 스크롤
 <img width="100%" src="/public/img/readme/market_list_1.gif">
 </br>
@@ -83,10 +91,6 @@
 
 - 상품 구매
 <img width="100%" src="/public/img/readme/market_charge_2.gif">
-<br>
-
-- 권한분기, 로그인
-<img width="100%" src="/public/img/readme/권한분기.gif">
 <br>
 
 ## Giphy
